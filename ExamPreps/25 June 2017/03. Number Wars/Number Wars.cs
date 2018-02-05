@@ -6,7 +6,6 @@ using System.Linq;
 namespace _03._Number_Wars
 {
     class NumberWars
-    // 70/100
     {
         static void Main(string[] args)
         {
