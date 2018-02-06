@@ -4,7 +4,6 @@ using System.Linq;
 
 namespace _04._Hospital
 {
-    // 80/100
     class Hospital
     {
         static void Main(string[] args)
