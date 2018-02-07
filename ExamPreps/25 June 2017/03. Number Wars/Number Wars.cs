@@ -9,7 +9,7 @@ namespace _03._Number_Wars
     {
         static void Main(string[] args)
         {
-            Queue firstPlayerDeck = InitializeQueue();
+            Queue firstPlayerDeck = InitializeQueue(); 
             Queue secondPlayerDeck = InitializeQueue();
 
             int counter = 0;
@@ -159,14 +159,14 @@ namespace _03._Number_Wars
             return cardsToEnqueue = cardsToEnqueue.OrderByDescending(c => c.Length).ThenByDescending(c => c).ToList();
         }
 
-        private static int CalculateCharStrength(string firstPlayerCard)
+        private static int CalculateCharStrength(string card)
         {
             var ch = 0;
-            for (int i = firstPlayerCard.Length - 1; i >= firstPlayerCard.Length - 1; i--)
+            for (int i = card.Length - 1; i >= card.Length - 1; i--)
             {
-                ch = firstPlayerCard[i];
+                ch = card[i];
             }
-            return (int)ch - 96;
+            return ch - 96;
         }
 
         private static int CalculateNumStrenght(string card)
