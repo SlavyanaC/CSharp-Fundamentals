@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2027
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "04. Cubic Assault", "04. Cubic Assault\04. Cubic Assault.csproj", "{241FCF2A-157D-45B4-A3C4-1BB70A72ECC1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "03. Cubic Messages", "03. Cubic Messages\03. Cubic Messages.csproj", "{89B22B9D-FB57-49C5-B312-A6657C44A725}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{241FCF2A-157D-45B4-A3C4-1BB70A72ECC1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{241FCF2A-157D-45B4-A3C4-1BB70A72ECC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{241FCF2A-157D-45B4-A3C4-1BB70A72ECC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{241FCF2A-157D-45B4-A3C4-1BB70A72ECC1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{89B22B9D-FB57-49C5-B312-A6657C44A725}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{89B22B9D-FB57-49C5-B312-A6657C44A725}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{89B22B9D-FB57-49C5-B312-A6657C44A725}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{89B22B9D-FB57-49C5-B312-A6657C44A725}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AE7FC3CB-B8A8-4068-9041-9437802391AD}
+	EndGlobalSection
+EndGlobal
