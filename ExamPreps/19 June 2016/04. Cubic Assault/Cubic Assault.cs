@@ -6,7 +6,7 @@ namespace _04._Cubic_Assault
 {
     class Program
     {
-        //70/100
+        private const long transformationBorder = 1_000_000;
         static void Main(string[] args)
         {
             var regionsWithMeteorsAndCount = new Dictionary<string, Dictionary<string, long>>();
@@ -21,26 +21,29 @@ namespace _04._Cubic_Assault
                 if (!regionsWithMeteorsAndCount.ContainsKey(region))
                 {
                     regionsWithMeteorsAndCount.Add(region, new Dictionary<string, long>());
-                    regionsWithMeteorsAndCount[region].Add("Black", 0);
-                    regionsWithMeteorsAndCount[region].Add("Red", 0);
-                    regionsWithMeteorsAndCount[region].Add("Green", 0);
+                    regionsWithMeteorsAndCount[region].Add("Black", 0L);
+                    regionsWithMeteorsAndCount[region].Add("Red", 0L);
+                    regionsWithMeteorsAndCount[region].Add("Green", 0L);
                 }
                 if (regionsWithMeteorsAndCount[region].ContainsKey(meteorType))
                 {
                     regionsWithMeteorsAndCount[region][meteorType] += count;
                 }
 
-                var greens = regionsWithMeteorsAndCount[region]["Green"];
-                var convertedGreen = greens / 1_000_000;
-                regionsWithMeteorsAndCount[region]["Red"] += convertedGreen;
-                regionsWithMeteorsAndCount[region]["Green"] -= convertedGreen * 1_000_000;
-
-                var reds = regionsWithMeteorsAndCount[region]["Red"];
-                var convertedRed = reds / 1_000_000;
-                regionsWithMeteorsAndCount[region]["Black"] += convertedRed;
-                regionsWithMeteorsAndCount[region]["Red"] -= convertedRed * 1_000_000;
-
-
+                if (regionsWithMeteorsAndCount[region]["Green"] >= transformationBorder)
+                {
+                    var greens = regionsWithMeteorsAndCount[region]["Green"];
+                    var convertedGreen = greens / transformationBorder;
+                    regionsWithMeteorsAndCount[region]["Red"] += convertedGreen;
+                    regionsWithMeteorsAndCount[region]["Green"] %= transformationBorder;
+                }
+                if (regionsWithMeteorsAndCount[region]["Red"] >= transformationBorder)
+                {
+                    var reds = regionsWithMeteorsAndCount[region]["Red"];
+                    var convertedRed = reds / transformationBorder;
+                    regionsWithMeteorsAndCount[region]["Black"] += convertedRed;
+                    regionsWithMeteorsAndCount[region]["Red"] %= transformationBorder;
+                }
             }
 
             foreach (var kvp in regionsWithMeteorsAndCount.OrderByDescending(m => m.Value["Black"]).ThenBy(m => m.Key.Length).ThenBy(m => m.Key))
@@ -54,7 +57,6 @@ namespace _04._Cubic_Assault
                     Console.WriteLine($"-> {mete.Key} : {mete.Value}");
                 }
             }
-
         }
     }
 }
