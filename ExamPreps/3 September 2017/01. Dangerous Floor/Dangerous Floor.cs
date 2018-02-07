@@ -2,7 +2,6 @@
 
 namespace _01._Dangerous_Floor
 {
-    // 75/100 
     class DangerousFloor
 
     {
@@ -32,6 +31,7 @@ namespace _01._Dangerous_Floor
                         if (!isValid)
                         {
                             PrintInvalidMessage();
+                            continue;
                         }
                         if (!StaysOnBoard(moveRow, moveCol, board))
                         {
@@ -122,7 +122,7 @@ namespace _01._Dangerous_Floor
 
         private static bool CheckIfKingMovementIsValid(int takeRow, int takeCol, int moveRow, int moveCol)
         {
-           return (moveRow == takeRow - 1 && moveCol == takeCol) || // upLeft
+           return (moveRow == takeRow - 1 && moveCol == takeCol -1) || // upLeft
                   (moveRow == takeRow && moveCol == takeCol - 1) || // left
                   (moveRow == takeRow + 1 && moveCol == takeCol - 1) || //dowLeft
                   (moveRow == takeRow - 1 && moveCol == takeCol) || // up
