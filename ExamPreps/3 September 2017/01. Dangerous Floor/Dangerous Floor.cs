@@ -88,25 +88,6 @@ namespace _01._Dangerous_Floor
             }
         }
 
-        private static void PrintBoard(char[,] board)
-        {
-            for (int row = 0; row < board.GetLength(0); row++)
-            {
-                for (int col = 0; col < board.GetLength(1); col++)
-                {
-                    if (col == board.GetLength(1) - 1)
-                    {
-                        Console.Write(board[row, col]);
-                    }
-                    else
-                    {
-                        Console.Write(board[row, col] + ",");
-                    }
-                }
-                Console.WriteLine();
-            }
-        }
-
         private static void PrintInvalidMessage()
         {
             Console.WriteLine("Invalid move!");
