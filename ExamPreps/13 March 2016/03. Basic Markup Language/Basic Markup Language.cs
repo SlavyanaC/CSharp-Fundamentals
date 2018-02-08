@@ -1,106 +1,83 @@
 ﻿using System;
-using System.Text.RegularExpressions;
-using System.Linq;
 using System.Text;
+using System.Linq;
+using System.Text.RegularExpressions;
 
-namespace _03._Basic_Markup_Language
+namespace BasicMarkupLanguage
 {
-    class Program
+    // Solved with help
+    public class BasicMarkup
     {
-        static void Main(string[] args)
+        private static int lineIndex = 1;
+
+        public static void Main()
         {
-            int counter = 0;
-            var input = string.Empty;
-            while ((input = Console.ReadLine().Trim()) != "<stop/>")
+            string pattern = @"\s*<\s*([a-z]+)\s+(?:value\s*=\s*""\s*(\d+)\s*""\s+)?[a-z]+\s*=\s*""([^""]*)""\s*\/>\s*";
+            Regex rgx = new Regex(pattern);
+
+            string line = Console.ReadLine();
+            while (line != "<stop/>")
             {
-                var tokens = input.Trim('<').Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-                var command = tokens[0];
-                Regex pattern = new Regex(@"""([A-Za-z0-9]+)""");
-                MatchCollection matches = pattern.Matches(input);
-
-                string[] textArgs = input.Split(new[] { '"' }).ToArray();
-                if (textArgs[1].Contains(' '))
+                Match match = rgx.Match(line);
+                string tag = match.Groups[1].Value;
+                switch (tag)
                 {
-                    counter++;
-                    Console.WriteLine($"{counter}.");
-                    continue;
-                }
-                
-                else if (matches.Count > 1)
-                {
-                    MatchCollection collection = pattern.Matches(input);
-                    var matchRepeats = matches[0];
-                    int repeats = int.Parse(matchRepeats.ToString().Trim('"'));
-                    if (repeats == 0)
-                    {
-                        counter++;
-                        Console.WriteLine($"{counter}.");
-                        continue;
-                    }
-                    var message = matches[1];
-                    var result = message.ToString().Trim('"');
-                    for (int i = 0; i < repeats; i++)
-                    {
-                        counter++;
-                        PrintOutput(counter, result);
-                    }
+                    case "inverse":
+                        ProcessInverseTag(match.Groups[3].Value);
+                        break;
+                    case "reverse":
+                        ProcessReverseTag(match.Groups[3].Value);
+                        break;
+                    case "repeat":
+                        ProcessRepeatTag(match.Groups[3].Value, int.Parse(match.Groups[2].Value));
+                        break;
                 }
 
-                else if (matches.Count == 1)
-                {
-                    var message = pattern.Match(input);
-                    switch (command)
-                    {
-                        case "inverse":
-                            counter++;
-                            ExecuteInverseCommand(message, counter);
-                            break;
-                        case "reverse":
-                            counter++;
-                            ExecuteReverseCommand(message, counter);
-                            break;
-                    }
-                }
+                line = Console.ReadLine();
             }
         }
 
-        private static void ExecuteReverseCommand(Match message, int counter)
+        private static void ProcessInverseTag(string input)
         {
-            StringBuilder result = new StringBuilder();
-            string mtch = message.Groups[1].Value;
-            for (int i = mtch.Length - 1; i >= 0; i--)
+            if (input.Length > 0)
             {
-                result.Append(mtch[i]);
+                StringBuilder sb = new StringBuilder();
+                foreach (char ch in input)
+                {
+                    if (char.IsUpper(ch))
+                    {
+                        sb.Append(char.ToLower(ch));
+                    }
+                    else if (char.IsLower(ch))
+                    {
+                        sb.Append(char.ToUpper(ch));
+                    }
+                    else
+                    {
+                        sb.Append(ch);
+                    }
+                }
+                Console.WriteLine($"{lineIndex++}. {sb}");
             }
-
-            PrintOutput(counter, result.ToString());
         }
 
-        private static void ExecuteInverseCommand(Match message, int counter)
+        private static void ProcessReverseTag(string input)
         {
-            StringBuilder result = new StringBuilder();
-            foreach (var ch in message.Groups[1].Value)
+            if (input.Length > 0)
             {
-                if (char.IsUpper(ch))
-                {
-                    result.Append(char.ToLower(ch));
-                }
-                else if (char.IsLower(ch))
-                {
-                    result.Append(char.ToUpper(ch));
-                }
-                else
-                {
-                    result.Append(ch);
-                }
+                Console.WriteLine($"{lineIndex++}. {string.Join(string.Empty, input.Reverse())}");
             }
-
-            PrintOutput(counter, result.ToString());
         }
 
-        private static void PrintOutput(int counter, string result)
+        private static void ProcessRepeatTag(string input, int repetitions)
         {
-            Console.WriteLine($"{counter}. {result}");
+            if (repetitions > 0 && input.Length > 0)
+            {
+                for (int i = 0; i < repetitions; i++)
+                {
+                    Console.WriteLine($"{lineIndex++}. {input}");
+                }
+            }
         }
     }
 }
