@@ -26,10 +26,6 @@ namespace _02._Monopoly
                 {
                     for (int col = 0; col < board.GetLength(1); col++)
                     {
-                        if (money < 0)
-                        {
-                            money = 0;
-                        }
                         switch (board[row, col])
                         {
                             case 'H':
@@ -80,10 +76,6 @@ namespace _02._Monopoly
                 {
                     for (int col = board.GetLength(1) - 1; col >= 0; col--) 
                     {
-                        if (money <= 0)
-                        {
-                            money = 0;
-                        }
                         switch (board[row, col])
                         {
                             case 'H':
