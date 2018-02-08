@@ -83,7 +83,7 @@ namespace _04._Champions_League
                     }
                     else
                     {
-                        if (!teamsWithOpponents.ContainsKey(secondTeam))
+                        if (!teamsWithWins.ContainsKey(secondTeam))
                         {
                             teamsWithWins.Add(secondTeam, 0);
                         }
