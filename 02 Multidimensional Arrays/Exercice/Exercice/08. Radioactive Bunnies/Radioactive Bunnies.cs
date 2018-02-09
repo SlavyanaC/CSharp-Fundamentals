@@ -5,162 +5,174 @@ namespace _08_RadioActiveBunnies
 {
     class Program
     {
+        static char[,] board;
+        static int playerRow;
+        static int playerCol;
+        static int rows;
+        static int columns;
+
         static void Main(string[] args)
         {
-            int[] matrixData = Console.ReadLine().Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToArray();
-            char[,] matrix = new char[matrixData[0], matrixData[1]];
-            int[] playerPosition = new int[2];
-            FillMatrix(matrix, playerPosition);
-            string commands = Console.ReadLine();
-            for (int i = 0; i < commands.Length; i++)
+            int[] dimensions = Console.ReadLine()
+                .Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)
+                .Select(int.Parse)
+                .ToArray();
+            board = ReadAndFillMatrix(dimensions);
+            char[] movements = Console.ReadLine().ToCharArray();
+            foreach (var move in movements)
             {
-                MovePlayer(commands[i], playerPosition);
-                bool isWin = IsGameWon(matrix, playerPosition);
-                char[,] mutatedMatrix = MutateBunnies(matrix);
-                matrix = mutatedMatrix;
-                if (isWin)
-                {
-                    PrintMatrix(matrix);
-                    Console.WriteLine($"won: {playerPosition[0]} {playerPosition[1]}");
-                    Environment.Exit(0);
-                }
-                IsGameOver(matrix, playerPosition);
-            }
+                int[] previousLocation = MovePlayer(move);
+                MultiplyBunnies();
 
-            matrix[playerPosition[0], playerPosition[1]] = 'P';
-            PrintMatrix(matrix);
-            Console.WriteLine($"won: {playerPosition[0]} {playerPosition[1]}");
-        }
+                if (IsPlayerOnBoard())
+                {
+                    if (board[playerRow, playerCol] == 'B')
+                    {
+                        Die();
+                    }
+                    continue;
+                }
 
-        private static bool IsGameWon(char[,] matrix, int[] playerPosition)
-        {
-            bool isGameWon = false;
-            if (playerPosition[0] >= matrix.GetLength(0) || playerPosition[0] < 0 || 
-                playerPosition[1] < 0 || playerPosition[1] >= matrix.GetLength(1))
-            {
-                isGameWon = true;
-                if (playerPosition[0] >= matrix.GetLength(0))
-                {
-                    playerPosition[0] = matrix.GetLength(0) - 1;
-                }
-                else if (playerPosition[0] < 0)
-                {
-                    playerPosition[0] = 0;
-                }
-                else if (playerPosition[1] >= matrix.GetLength(1))
-                {
-                    playerPosition[1] = matrix.GetLength(1) - 1;
-                }
-                else if (playerPosition[1] < 0)
-                {
-                    playerPosition[1] = 0;
-                }
-            }
-
-            return isGameWon;
-        }
-
-        private static void IsGameOver(char[,] matrix, int[] playerPosition)
-        {
-            if (matrix[playerPosition[0], playerPosition[1]] == 'B')
-            {
-                PrintMatrix(matrix);
-                Console.WriteLine($"dead: {playerPosition[0]} {playerPosition[1]}");
-                Environment.Exit(0);
+                Win(previousLocation);
             }
         }
 
-        private static void PrintMatrix(char[,] matrix)
+        private static void Win(int[] previousLocation)
         {
-            for (int row = 0; row < matrix.GetLength(0); row++)
+            PrintBoard();
+
+            int row = previousLocation[0];
+            int col = previousLocation[1];
+            Console.WriteLine($"won: {row} {col}");
+            Environment.Exit(0);
+        }
+
+        private static void Die()
+        {
+            PrintBoard();
+
+            Console.WriteLine($"dead: {playerRow} {playerCol}");
+            Environment.Exit(0);
+        }
+
+        private static bool IsPlayerOnBoard()
+        {
+            return playerRow >= 0 && playerRow < rows &&
+                   playerCol >= 0 && playerCol < columns;
+        }
+
+        private static void PrintBoard()
+        {
+            for (int row = 0; row < rows; row++)
             {
-                for (int col = 0; col < matrix.GetLength(1); col++)
+                for (int col = 0; col < columns; col++)
                 {
-                    Console.Write(matrix[row, col]);
+                    Console.Write(board[row, col]);
                 }
                 Console.WriteLine();
             }
         }
 
-        private static char[,] MutateBunnies(char[,] matrix)
+        private static void MultiplyBunnies()
         {
-            int topBorder = 0;
-            int bottomBorder = matrix.GetLength(0);
-
-            int leftBorder = 0;
-            int rightBorder = matrix.GetLength(1);
-
-            char[,] mutatedMatrix = new char[matrix.GetLength(0), matrix.GetLength(1)];
-            FillBlankMutatedMatrix(mutatedMatrix);
-            for (int row = 0; row < matrix.GetLength(0); row++)
+            for (int row = 0; row < rows; row++)
             {
-                for (int col = 0; col < matrix.GetLength(1); col++)
+                for (int col = 0; col < columns; col++)
                 {
-                    if (matrix[row, col] == 'B')
+                    if (board[row, col] == 'B')
                     {
-                        mutatedMatrix[row, col] = 'B';
-                        if ((col + 1) < rightBorder && matrix[row, col + 1] == '.')
+                        if (row > 0)
                         {
-                            mutatedMatrix[row, col + 1] = 'B';
+                            CreateNewBunny(row - 1, col); // Up
                         }
-                        if ((col - 1) >= leftBorder && matrix[row, col - 1] == '.')
+                        if (row < rows - 1)
                         {
-                            mutatedMatrix[row, col - 1] = 'B';
+                            CreateNewBunny(row + 1, col); // Down
                         }
-                        if ((row + 1) < bottomBorder && matrix[row + 1, col] == '.')
+                        if (col > 0)
                         {
-                            mutatedMatrix[row + 1, col] = 'B';
+                            CreateNewBunny(row, col - 1); // Left
                         }
-                        if ((row - 1) >= topBorder && matrix[row - 1, col] == '.')
+                        if (col < columns - 1)
                         {
-                            mutatedMatrix[row - 1, col] = 'B';
+                            CreateNewBunny(row, col + 1); // Right
                         }
                     }
                 }
             }
 
-            return mutatedMatrix;
-        }
-
-        private static void FillBlankMutatedMatrix(char[,] mutatedMatrix)
-        {
-            for (int row = 0; row < mutatedMatrix.GetLength(0); row++)
+            for (int row = 0; row < rows; row++)
             {
-                for (int col = 0; col < mutatedMatrix.GetLength(1); col++)
+                for (int col = 0; col < columns; col++)
                 {
-                    mutatedMatrix[row, col] = '.';
+                    if (board[row, col] == 'X')
+                    {
+                        board[row, col] = 'B';
+                    }
                 }
             }
         }
 
-        private static void MovePlayer(char command, int[] playerPosition)
+        private static void CreateNewBunny(int row, int col)
         {
-            switch (command)
+            if (board[row, col] != 'B')
             {
-                case 'R': playerPosition[1] += 1; break;
-                case 'L': playerPosition[1] -= 1; break;
-                case 'U': playerPosition[0] -= 1; break;
-                case 'D': playerPosition[0] += 1; break;
+                board[row, col] = 'X';
             }
         }
 
-        private static void FillMatrix(char[,] matrix, int[] playerStart)
+        private static int[] MovePlayer(char move)
         {
-            for (int row = 0; row < matrix.GetLength(0); row++)
+            int[] previousLocation = { playerRow, playerCol };
+            switch (move)
             {
-                string input = Console.ReadLine();
-                if (input.Contains('P'))
+                case 'U':
+                    playerRow--;
+                    break;
+                case 'D':
+                    playerRow++;
+                    break;
+                case 'L':
+                    playerCol--;
+                    break;
+                case 'R':
+                    playerCol++;
+                    break;
+            }
+
+            if (IsPlayerOnBoard() && board[playerRow, playerCol] != 'B') // Move Player on board
+            {
+                board[playerRow, playerCol] = 'P';
+            }
+
+            int oldRow = previousLocation[0];
+            int oldCol = previousLocation[1];
+
+            board[oldRow, oldCol] = '.';
+
+            return previousLocation;
+        }
+
+        private static char[,] ReadAndFillMatrix(int[] dimensions)
+        {
+            rows = dimensions[0];
+            columns = dimensions[1];
+            char[,] matrix = new char[rows, columns];
+            for (int row = 0; row < rows; row++)
+            {
+                var inputLine = Console.ReadLine();
+                for (int col = 0; col < columns; col++)
                 {
-                    playerStart[0] = row;
-                    playerStart[1] = input.IndexOf('P');
-                }
-                for (int col = 0; col < matrix.GetLength(1); col++)
-                {
-                    matrix[row, col] = input[col];
+                    matrix[row, col] = inputLine[col];
+                    if (inputLine[col] == 'P')
+                    {
+                        playerRow = row;
+                        playerCol = col;
+                    }
                 }
             }
 
-            matrix[playerStart[0], playerStart[1]] = '.';
+            return matrix;
         }
     }
 }
