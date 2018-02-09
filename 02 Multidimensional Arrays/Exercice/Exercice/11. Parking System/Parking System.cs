@@ -1,84 +1,77 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace _11._Parking_System
 {
     public class ParkingSystem
     {
+        static bool[][] parking;
+        static int rows;
+        static int cols;
+
         public static void Main()
         {
-            int[] dimensions = Console.ReadLine().Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToArray();
-            int rows = dimensions[0];
-            int cols = dimensions[1];
-
-            Dictionary<int, HashSet<int>> parking = new Dictionary<int, HashSet<int>>();
-
-            string[] input = Console.ReadLine().Split().ToArray();
-            while (!input[0].Equals("stop"))
+            int[] dimensions = Console.ReadLine().Split().Select(int.Parse).ToArray();
+            rows = dimensions[0];
+            cols = dimensions[1];
+            parking = new bool[rows][];
+            string command;
+            while ((command = Console.ReadLine()) != "stop")
             {
-                int enter = int.Parse(input[0]);
-                int wantedRow = int.Parse(input[1]);
-                int wantedCol = int.Parse(input[2]);
-                bool foundSpot = false;
-
-                if (!IsOccupied(parking, wantedRow, wantedCol))
+                int[] commandArgs = command.Split() .Select(int.Parse).ToArray();
+                int entryRow = commandArgs[0];
+                int targetRow = commandArgs[1];
+                int targetCol = commandArgs[2];
+                if (IsSpotTaken(targetRow, targetCol))
                 {
-                    foundSpot = true;
-                    if (parking.ContainsKey(wantedRow))
-                    {
-                        parking[wantedRow].Add(wantedCol);
-                    }
-                    else
-                    {
-                        parking[wantedRow] = new HashSet<int>() { wantedCol };
-                    }
+                    targetCol = TryFindFreeSpot(targetRow, targetCol);
+                }
+                if (targetCol > 0)
+                {
+                    MatkSpotAsTaken(targetRow, targetCol);
 
-                    int count = Math.Abs(enter - wantedRow) + 1 + wantedCol;
-                    Console.WriteLine(count);
+                    int distancePassed = Math.Abs(entryRow - targetRow) + targetCol + 1;
+                    Console.WriteLine(distancePassed);
                 }
                 else
                 {
-                    for (int move = 0; move < cols; move++)
-                    {
-                        if (wantedCol - move > 0 && !IsOccupied(parking, wantedRow, wantedCol - move))
-                        {
-                            foundSpot = true;
-                            parking[wantedRow].Add(wantedCol - move);
-                            int count = Math.Abs(enter - wantedRow) + 1 + wantedCol - move;
-                            Console.WriteLine(count);
-                            break;
-                        }
-                        if (wantedCol + move < cols && !IsOccupied(parking, wantedRow, wantedCol + move))
-                        {
-                            foundSpot = true;
-                            parking[wantedRow].Add(wantedCol + move);
-                            int count = Math.Abs(enter - wantedRow) + 1 + wantedCol + move;
-                            Console.WriteLine(count);
-                            break;
-                        }
-                    }
+                    Console.WriteLine($"Row {targetRow} full");
                 }
-
-                if (!foundSpot)
-                {
-                    Console.WriteLine($"Row {wantedRow} full");
-                }
-
-                input = Console.ReadLine().Split().ToArray();
             }
         }
 
-        public static bool IsOccupied(Dictionary<int, HashSet<int>> parking, int row, int col)
+        private static void MatkSpotAsTaken(int targetRow, int targetCol)
         {
-            if (parking.ContainsKey(row))
+            if (parking[targetRow] == null)
             {
-                if (parking[row].Contains(col))
+                parking[targetRow] = new bool[cols];
+            }
+            parking[targetRow][targetCol] = true;
+        }
+
+        private static int TryFindFreeSpot(int targetRow, int targetCol)
+        {
+            int parkingCol = 0;
+            int bestDistance = int.MaxValue;
+            for (int currentCol = 1; currentCol < cols; currentCol++)
+            {
+                if (!parking[targetRow][currentCol])
                 {
-                    return true;
+                    int distance = Math.Abs(currentCol - targetCol);
+                    if (distance < bestDistance)
+                    {
+                        parkingCol = currentCol;
+                        bestDistance = distance;
+                    }
                 }
             }
-            return false;
+
+            return parkingCol;
+        }
+
+        private static bool IsSpotTaken(int targetRow, int targetCol)
+        {
+            return parking[targetRow] != null && parking[targetRow][targetCol];
         }
     }
 }
