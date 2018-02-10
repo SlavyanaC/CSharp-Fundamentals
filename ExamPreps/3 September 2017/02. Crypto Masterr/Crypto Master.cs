@@ -8,7 +8,7 @@ namespace _02._Crypto_Masterr
         static void Main(string[] args)
         {
             int[] numbers = Console.ReadLine().Split(new[] { ", " }, StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToArray();
-            int maxSequence = 0;
+            int bestSequence = 0;
             for (int step = 1; step < numbers.Length; step++)
             {
                 for (int index = 0; index < numbers.Length; index++)
@@ -19,17 +19,17 @@ namespace _02._Crypto_Masterr
                     while (numbers[currentIndex] < numbers[nextIndex])
                     {
                         currentIndex = nextIndex;
-                        nextIndex = (nextIndex + step) % numbers.Length;
+                        nextIndex = (currentIndex + step) % numbers.Length;
                         currentSequence++;
                     }
-                    if (currentSequence > maxSequence)
+                    if (currentSequence > bestSequence)
                     {
-                        maxSequence = currentSequence;
+                        bestSequence = currentSequence;
                     }
                 }
             }
 
-            Console.WriteLine(maxSequence);
+            Console.WriteLine(bestSequence);
         }
     }
 }
