@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-class Box
+public class Box
 {
     private double length;
     private double width;
@@ -101,7 +101,7 @@ class Box
     {
         StringBuilder builder = new StringBuilder();
         builder.AppendLine($"Surface Area - {SurfaceArea:F2}");
-        builder.AppendLine($"Lateral Area - {LateralSurfaceArea:F2}");
+        builder.AppendLine($"Lateral Surface Area - {LateralSurfaceArea:F2}");
         builder.AppendLine($"Volume - {Volume:F2}");
 
         return builder.ToString().TrimEnd();
