@@ -9,7 +9,6 @@ class Pizza
     private const int maxNameLength = 15;
 
     private string name;
-    private int toppingsCount;
 
     public Pizza()
     {
