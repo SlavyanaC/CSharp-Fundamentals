@@ -8,8 +8,6 @@ class Team
     private string name;
     private List<Player> players;
 
-    //public Team() { }
-
     public Team(string name)
     {
         this.Name = name;
