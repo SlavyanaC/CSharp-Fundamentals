@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "03Mankind", "03Mankind\03Ma
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "04OnlineRadioDatabase", "04OnlineRadioDatabase\04OnlineRadioDatabase.csproj", "{2D9AD366-96DA-4CB5-85F0-D54704901F0E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "05MordorsCruelPlan", "05MordorsCruelPlan\05MordorsCruelPlan.csproj", "{53D37472-4FDE-450F-A968-C0091C6C3F39}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "05MordorsCruelPlan", "05MordorsCruelPlan\05MordorsCruelPlan.csproj", "{53D37472-4FDE-450F-A968-C0091C6C3F39}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "06Animals", "06Animals\06Animals.csproj", "{7BBCEFEB-99E6-49D2-9838-03E97D8310BA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{53D37472-4FDE-450F-A968-C0091C6C3F39}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{53D37472-4FDE-450F-A968-C0091C6C3F39}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{53D37472-4FDE-450F-A968-C0091C6C3F39}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7BBCEFEB-99E6-49D2-9838-03E97D8310BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7BBCEFEB-99E6-49D2-9838-03E97D8310BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7BBCEFEB-99E6-49D2-9838-03E97D8310BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7BBCEFEB-99E6-49D2-9838-03E97D8310BA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
