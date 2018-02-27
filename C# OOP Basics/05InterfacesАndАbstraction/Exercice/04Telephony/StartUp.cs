@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace _04Telephony
 {
@@ -6,7 +7,17 @@ namespace _04Telephony
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Smartphone smartphone = new Smartphone();
+            string[] nums = Console.ReadLine().Split();
+            foreach (var num in nums)
+            {
+                smartphone.Call(num);
+            }
+            string[] sites = Console.ReadLine().Split();
+            foreach (var site in sites)
+            {
+                smartphone.Browse(site);
+            }
         }
     }
 }
