@@ -8,8 +8,7 @@ namespace _05BorderControl
     {
         static void Main()
         {
-            var citizens = new List<Citizen>();
-            var robots = new List<Robot>();
+            List<IId> ids = new List<IId>();
             string input = string.Empty;
             while ((input = Console.ReadLine())!= "End")
             {
@@ -19,24 +18,22 @@ namespace _05BorderControl
                     string name = tokens[0];
                     int age = int.Parse(tokens[1]);
                     string id = tokens[2];
-                    citizens.Add(new Citizen(name, age, id));
+                    ids.Add(new Citizen(name, age, id));
                 }
                 else
                 {
                     string model = tokens[0];
                     string id = tokens[1];
-                    robots.Add(new Robot(model, id));
+                    ids.Add(new Robot(model, id));
                 }
             }
 
             string fakeId = Console.ReadLine();
 
-            var detained = citizens
+            var detained = ids
                 .Where(c => c.Id.EndsWith(fakeId))
                 .Select(c => c.Id)
-                .Concat(robots.Where(r => r.Id.EndsWith(fakeId))
-                .Select(r => r.Id)
-                .ToList());
+                .ToList();
             Console.WriteLine(string.Join(Environment.NewLine, detained));
         }
     }
