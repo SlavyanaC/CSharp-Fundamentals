@@ -29,7 +29,6 @@ namespace _05BorderControl
             }
 
             string fakeId = Console.ReadLine();
-
             var detained = ids
                 .Where(c => c.Id.EndsWith(fakeId))
                 .Select(c => c.Id)
