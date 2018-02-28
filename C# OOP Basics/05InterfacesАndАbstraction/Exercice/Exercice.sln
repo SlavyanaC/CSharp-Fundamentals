@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2027
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "01DefineanInterfaceIPerson", "01DefineanInterfaceIPerson\01DefineanInterfaceIPerson.csproj", "{74ED2D59-C79D-4232-A3E4-9FA19B0566EC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "01DefineanInterfaceIPerson", "01DefineanInterfaceIPerson\01DefineanInterfaceIPerson.csproj", "{74ED2D59-C79D-4232-A3E4-9FA19B0566EC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "02MultipleImplementation", "02MultipleImplementation\02MultipleImplementation.csproj", "{7AC36C13-2251-4DEA-8E58-1F747E9E449A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "02MultipleImplementation", "02MultipleImplementation\02MultipleImplementation.csproj", "{7AC36C13-2251-4DEA-8E58-1F747E9E449A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "03Ferrari", "03Ferrari\03Ferrari.csproj", "{786B32C4-DA5B-4C5C-A260-2E26FF78EA86}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "03Ferrari", "03Ferrari\03Ferrari.csproj", "{786B32C4-DA5B-4C5C-A260-2E26FF78EA86}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "04Telephony", "04Telephony\04Telephony.csproj", "{3207E844-2D5F-4692-A0E0-B62FD3D9C21A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "04Telephony", "04Telephony\04Telephony.csproj", "{3207E844-2D5F-4692-A0E0-B62FD3D9C21A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "05BorderControl", "05BorderControl\05BorderControl.csproj", "{53D73881-17EB-4A25-B5E8-0A643555E096}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{3207E844-2D5F-4692-A0E0-B62FD3D9C21A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3207E844-2D5F-4692-A0E0-B62FD3D9C21A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3207E844-2D5F-4692-A0E0-B62FD3D9C21A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{53D73881-17EB-4A25-B5E8-0A643555E096}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53D73881-17EB-4A25-B5E8-0A643555E096}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53D73881-17EB-4A25-B5E8-0A643555E096}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53D73881-17EB-4A25-B5E8-0A643555E096}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
