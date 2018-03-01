@@ -59,18 +59,18 @@ namespace _08MilitaryElite
             string corps = tokens[5];
             if (corps == "Airforces" || corps == "Marines") 
             {
-                Commando engeneer = new Commando(id, firstName, lastName, salary, corps);
+                Commando commando = new Commando(id, firstName, lastName, salary, corps);
                 for (int i = 6; i < tokens.Length; i += 2)
                 {
                     var codeName = tokens[i];
                     var state = tokens[i + 1];
                     if (state == "Finished" || state == "inProgress")
                     {
-                        engeneer.Missions.Add(new Mission(codeName, state));
+                        commando.Missions.Add(new Mission(codeName, state));
                     }
                 }
 
-                soldiers.Add(engeneer);
+                soldiers.Add(commando);
             }
         }
 
