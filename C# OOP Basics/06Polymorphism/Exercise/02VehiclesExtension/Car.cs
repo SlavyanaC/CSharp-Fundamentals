@@ -2,14 +2,10 @@
 {
     public const double AccConsumption = 0.9;
 
-    public Car(double fuelQuantity, double fuelConsumption)
+    public Car(double fuelQuantity, double fuelConsumption, double tankCapacity)
     {
         this.FuelQuantity = fuelQuantity;
         this.FuelConsumption = fuelConsumption + AccConsumption;
-    }
-
-    public override string ToString()
-    {
-        return $"{this.GetType().Name}: {this.FuelQuantity:F2}";
+        this.TankCapacity = tankCapacity;
     }
 }
