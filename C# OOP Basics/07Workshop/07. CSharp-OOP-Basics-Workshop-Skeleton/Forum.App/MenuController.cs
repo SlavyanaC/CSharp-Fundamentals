@@ -3,8 +3,8 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using Forum.App.Services;
-    using Forum.App.Services.Contracts;
+    using Forum.App.Controllers;
+    using Forum.App.Controllers.Contracts;
     using Forum.App.UserInterface;
     using Forum.App.UserInterface.Contracts;
 
@@ -81,7 +81,7 @@
 
         internal void Back()
         {
-            if (this.State == MenuState.Categories || this.State == MenuState.ViewCategory)
+            if (this.State == MenuState.Categories || this.State == MenuState.OpenCategory)
             {
                 IPaginationController currentController = (IPaginationController)this.CurrentController;
                 currentController.CurrentPage = 0;
@@ -118,8 +118,8 @@
                 case MenuState.Back:
                     this.Back();
                     break;
-                case MenuState.ViewCategory:
-                case MenuState.Error:
+				case MenuState.Error:
+                case MenuState.Rerender:
                     RenderCurrentView();
                     break;
                 case MenuState.AddReplyToPost:

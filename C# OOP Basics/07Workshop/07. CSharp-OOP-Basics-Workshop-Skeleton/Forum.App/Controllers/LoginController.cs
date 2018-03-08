@@ -1,6 +1,6 @@
-﻿namespace Forum.App.Services
+﻿namespace Forum.App.Controllers
 {
-    using Forum.App.Services.Contracts;
+    using Forum.App.Controllers.Contracts;
     using Forum.App.UserInterface.Contracts;
 
     public class LogInController : IController, IReadUserInfoController

@@ -1,10 +1,8 @@
-﻿namespace Forum.App.Services
+﻿namespace Forum.App.Controllers
 {
-    using System;
-
-    using Forum.App.Services.Contracts;
+    using Forum.App.Controllers.Contracts;
+    using Forum.App.UserInterface;
     using Forum.App.UserInterface.Contracts;
-    using Forum.App.UserInterface.Views; 
 
     public class MainController : IController, IUserRestrictedController
     {
@@ -47,7 +45,7 @@
                     return MenuState.Signup;
             }
 
-            throw new InvalidOperationException();
+            throw new InvalidCommandException();
         }
 
         public void UserLogIn()

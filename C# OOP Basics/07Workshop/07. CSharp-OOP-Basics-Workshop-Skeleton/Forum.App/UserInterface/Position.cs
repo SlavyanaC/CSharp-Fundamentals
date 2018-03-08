@@ -1,9 +1,9 @@
-﻿namespace Forum.App.UserInterface
-{
-	using System;
-	using System.Collections.Generic;
-	using System.Text;
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
 
+namespace Forum.App
+{
     public class Position
     {
         private int left;
