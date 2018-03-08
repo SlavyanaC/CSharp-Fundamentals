@@ -2,7 +2,7 @@
 {
     private string id;
 
-    public Worker(string id)
+    protected Worker(string id)
     {
         this.Id = id;
     }
