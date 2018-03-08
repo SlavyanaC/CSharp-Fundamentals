@@ -32,7 +32,7 @@ public class DraftManager
         {
             var provider = ProviderFactory.CreateProvider(arguments);
             providers.Add(provider);
-            var type = provider.GetType().Name.Equals("SolarProvider") ? "Solar" : "Pressure";
+            var type = arguments[0];
             return $"Successfully registered {type} Provider - {provider.Id}";
         }
         catch (ArgumentException exception)

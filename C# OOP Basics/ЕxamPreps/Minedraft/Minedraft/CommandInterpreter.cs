@@ -17,8 +17,9 @@ public class CommandInterpreter
     {
         while (this.isRunning == true)
         {
-            var inputCommand = Console.ReadLine();
-            var arguments = ParseInput(inputCommand);
+            var arguments = Console.ReadLine()
+                .Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)
+                .ToList(); ;
             ExecuteCommand(arguments);
         }
     }
@@ -51,12 +52,5 @@ public class CommandInterpreter
             default:
                 break;
         }
-    }
-
-    private List<string> ParseInput(string inputCommand)
-    {
-        return inputCommand
-            .Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)
-            .ToList();
     }
 }
