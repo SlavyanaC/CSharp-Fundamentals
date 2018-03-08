@@ -8,22 +8,18 @@ public class SonicHarvester : Harvester
         : base(id, oreOutput, energyRequirement)
     {
         this.SonicFactor = sonicFactor;
-        base.EnergyRequirement /= (double)this.SonicFactor;
+        base.EnergyRequirement /= this.SonicFactor;
     }
 
     public int SonicFactor
     {
-        get
-        {
-            return this.sonicFactor;
-        }
+        get=>this.sonicFactor;
         set
         {
-            if (value < 0)
+            if (value <= 0)
             {
                 throw new ArgumentException($"Harvester is not registered, because of it's {nameof(this.SonicFactor)}");
             }
-
             this.sonicFactor = value;
         }
     }

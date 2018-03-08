@@ -1,31 +1,16 @@
 ﻿using System;
 using System.Text;
 
-public abstract class Harvester
+public abstract class Harvester : Worker
 {
-    private string id;
     private double oreOutput;
     private double energyRequirement;
 
     protected Harvester(string id, double oreOutput, double energyRequirement)
+        :base(id)
     {
-        this.Id = id;
         this.OreOutput = oreOutput;
         this.EnergyRequirement = energyRequirement;
-    }
-
-    public string Id
-    {
-        get => this.id;
-        protected set
-        {
-            if (string.IsNullOrEmpty(value))
-            {
-                throw new ArgumentException($"Harvester is not registered, because of it's {nameof(this.Id)}");
-            }
-
-            this.id = value;
-        }
     }
 
     public double OreOutput
@@ -49,7 +34,7 @@ public abstract class Harvester
         {
             if (value < 0.0 || value > 20000.0)
             {
-                throw new ArgumentException($"Harvester is not registered, because of it's {nameof(this.OreOutput)}");
+                throw new ArgumentException($"Harvester is not registered, because of it's {nameof(this.EnergyRequirement)}");
             }
 
             this.energyRequirement = value;

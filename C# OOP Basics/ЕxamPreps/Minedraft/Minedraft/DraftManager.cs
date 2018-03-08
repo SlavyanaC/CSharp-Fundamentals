@@ -14,27 +14,11 @@ public class DraftManager
 
     public string RegisterHarvester(List<string> arguments)
     {
-        var type = arguments[0];
-        var id = arguments[1];
-        var energy = double.Parse(arguments[3]);
-        var oreOutput = double.Parse(arguments[2]);
-
         try
         {
-            if (type.Equals("Hammer"))
-            {
-                harvesters.Add(new HammerHarvester(id, oreOutput, energy));
-                return $"Successfully registered Hammer Harvester - {id}";
-            }
-
-            if (type.Equals("Sonic"))
-            {
-                var sonicFactor = int.Parse(arguments[4]);
-                harvesters.Add(new SonicHarvester(id, oreOutput, energy, sonicFactor));
-                return $"Successfully registered Sonic Harvester - {id}";
-            }
-
-            throw new ArgumentException();
+            var harvester = HarvesterFactory.CreateHarvester(arguments);
+            harvesters.Add(harvester);
+            return $"Successfully registered Sonic Harvester - {harvester.Id}";
         }
         catch (ArgumentException exception)
         {
@@ -44,21 +28,12 @@ public class DraftManager
 
     public string RegisterProvider(List<string> arguments)
     {
-        var type = arguments[0];
-        var id = arguments[1];
         try
         {
-            switch (type)
-            {
-                case "Solar":
-                    providers.Add(new SolarProvider(id, double.Parse(arguments[2])));
-                    return $"Successfully registered {type} Provider - {id}";
-                case "Pressure":
-                    providers.Add(new PressureProvider(id, double.Parse(arguments[2])));
-                    return $"Successfully registered {type} Provider - {id}";
-                default:
-                    throw new ArgumentException();
-            }
+            var provider = ProviderFactory.CreateProvider(arguments);
+            providers.Add(provider);
+            var type = provider.GetType().Name.Equals("SolarProvider") ? "Solar" : "Pressure";
+            return $"Successfully registered {type} Provider - {provider.Id}";
         }
         catch (ArgumentException exception)
         {
@@ -135,33 +110,5 @@ public class DraftManager
         builder.AppendLine($"Total Mined Plumbus Ore: {(int)totalMinedOre}");
 
         return builder.ToString().TrimEnd();
-    }
-
-    public void CommandInterpreter(string inputLine)
-    {
-        var arguments = inputLine.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries).ToList();
-        var command = arguments[0];
-        arguments = arguments.Skip(1).ToList();
-        switch (command)
-        {
-            case "RegisterHarvester":
-                Console.WriteLine(this.RegisterHarvester(arguments));
-                break;
-            case "RegisterProvider":
-                Console.WriteLine(this.RegisterProvider(arguments));
-                break;
-            case "Day":
-                Console.WriteLine(this.Day());
-                break;
-            case "Mode":
-                Console.WriteLine(this.Mode(arguments));
-                break;
-            case "Check":
-                Console.WriteLine(this.Check(arguments));
-                break;
-            case "Shutdown":
-                Console.WriteLine(this.ShutDown());
-                break;
-        }
     }
 }

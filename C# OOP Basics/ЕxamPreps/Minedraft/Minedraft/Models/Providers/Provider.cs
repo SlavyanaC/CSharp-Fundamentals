@@ -1,29 +1,15 @@
 ﻿using System;
 using System.Text;
 
-public abstract class Provider
+public abstract class Provider : Worker
 {
-    private string id;
     private double energyOutput;
 
     protected Provider(string id, double energyOutput)
+         : base(id)
     {
         this.Id = id;
         this.EnergyOutput = energyOutput;
-    }
-
-    public string Id
-    {
-        get => this.id;
-        protected set
-        {
-            if (string.IsNullOrEmpty(value))
-            {
-                throw new ArgumentException($"Provider is not registered, because of it's {nameof(this.Id)}");
-            }
-
-            this.id = value;
-        }
     }
 
     public double EnergyOutput

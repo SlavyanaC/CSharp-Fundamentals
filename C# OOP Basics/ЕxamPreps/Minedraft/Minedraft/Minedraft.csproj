@@ -42,13 +42,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommandInterpreter.cs" />
     <Compile Include="DraftManager.cs" />
+    <Compile Include="Factories\HarvesterFactory.cs" />
+    <Compile Include="Factories\ProviderFactory.cs" />
     <Compile Include="Models\Harvesters\HammerHarvester.cs" />
     <Compile Include="Models\Harvesters\Harvester.cs" />
     <Compile Include="Models\Harvesters\SonicHarvester.cs" />
     <Compile Include="Models\Providers\PressureProvider.cs" />
     <Compile Include="Models\Providers\Provider.cs" />
     <Compile Include="Models\Providers\SolarProvider.cs" />
+    <Compile Include="Models\Worker.cs" />
     <Compile Include="StartUp.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
