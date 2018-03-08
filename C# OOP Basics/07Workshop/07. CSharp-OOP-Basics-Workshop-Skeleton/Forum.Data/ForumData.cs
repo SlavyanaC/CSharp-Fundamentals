@@ -1,14 +1,14 @@
 ﻿namespace Forum.Data
 {
-    using System.Collections.Generic;
     using Forum.Models;
+    using System.Collections.Generic;
 
-    class ForumData
+    public class ForumData
     {
         public ForumData()
         {
-            this.Categories = DataMapper.LoadCategories();
             this.Users = DataMapper.LoadUsers();
+            this.Categories = DataMapper.LoadCategories();
             this.Posts = DataMapper.LoadPosts();
             this.Replies = DataMapper.LoadReplies();
         }
@@ -23,8 +23,8 @@
 
         public void SaveChanges()
         {
-            DataMapper.SaveCategories(this.Categories);
             DataMapper.SaveUsers(this.Users);
+            DataMapper.SaveCategories(this.Categories);
             DataMapper.SavePosts(this.Posts);
             DataMapper.SaveReplies(this.Replies);
         }

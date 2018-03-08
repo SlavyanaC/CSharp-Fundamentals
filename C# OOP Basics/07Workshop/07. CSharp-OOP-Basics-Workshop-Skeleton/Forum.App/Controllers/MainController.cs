@@ -21,15 +21,17 @@
         }
 
         public MenuState ExecuteCommand(int index)
-        {      
+        {
             if (LoggedInUser)
             {
                 switch ((UserCommand)index)
                 {
                     case UserCommand.Categories:
                         return MenuState.Categories;
+
                     case UserCommand.AddPost:
                         return MenuState.AddPost;
+
                     case UserCommand.LogOut:
                         return MenuState.LoggedOut;
                 }
@@ -39,8 +41,10 @@
             {
                 case GuestCommand.Categories:
                     return MenuState.Categories;
+
                 case GuestCommand.Login:
                     return MenuState.Login;
+
                 case GuestCommand.SignUp:
                     return MenuState.Signup;
             }

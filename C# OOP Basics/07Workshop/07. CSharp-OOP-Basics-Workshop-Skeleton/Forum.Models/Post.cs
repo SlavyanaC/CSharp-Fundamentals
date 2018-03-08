@@ -4,14 +4,20 @@
 
     public class Post
     {
-        public Post(int id, string title, string content, int categoryId, int authorId, IEnumerable<int> replyIds)
+        public Post(int id, string title, string content, int categoryId, int authorId)
         {
             this.Id = id;
             this.Title = title;
             this.Content = content;
             this.CategoryId = categoryId;
             this.AuthorId = authorId;
-            this.ReplieIds = new List<int>(replyIds);
+            this.ReplyIds = new List<int>();
+        }
+
+        public Post(int id, string title, string content, int categoryId, int authorId, IEnumerable<int> replyIds)
+            : this(id, title, content, categoryId, authorId)
+        {
+            this.ReplyIds = new List<int>(replyIds);
         }
 
         public int Id { get; set; }
@@ -24,6 +30,6 @@
 
         public int AuthorId { get; set; }
 
-        public ICollection<int> ReplieIds { get; set; }
+        public ICollection<int> ReplyIds { get; set; }
     }
 }

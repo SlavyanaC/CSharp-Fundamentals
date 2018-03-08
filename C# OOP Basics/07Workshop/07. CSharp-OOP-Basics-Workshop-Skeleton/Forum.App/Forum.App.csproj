@@ -9,4 +9,8 @@
     <Folder Include="UserInterface\ViewModels\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Forum.Data\Forum.Data.csproj" />
+  </ItemGroup>
+
 </Project>
