@@ -52,30 +52,31 @@ public abstract class Race : IPrize
         this.Cars[carId] = car;
     }
 
-    public string GetRaceResults(Dictionary<int, Car> CarsPerformancePoints)
+    public string GetRaceResults(Dictionary<int, Car> carsPerformancePoints)
     {
         StringBuilder raceResults = new StringBuilder();
         raceResults.AppendLine($"{this.Route} - {this.Length}");
 
-        if (CarsPerformancePoints.Count == 1)
+        carsPerformancePoints = carsPerformancePoints.OrderByDescending(c => c.Key).ToDictionary(c => c.Key, c => c.Value);
+        if (carsPerformancePoints.Count == 1)
         {
-            Car first = CarsPerformancePoints.First().Value;
-            raceResults.AppendLine($"1. {first.Brand} {first.Model} {CarsPerformancePoints.First().Key}PP - ${this.FirstPrize}");
+            Car first = carsPerformancePoints.First().Value;
+            raceResults.AppendLine($"1. {first.Brand} {first.Model} {carsPerformancePoints.First().Key}PP - ${this.FirstPrize}");
         }
-        else if (CarsPerformancePoints.Count == 2)
+        else if (carsPerformancePoints.Count == 2)
         {
-            Car first = CarsPerformancePoints.First().Value;
-            Car second = CarsPerformancePoints.Last().Value;
-            raceResults.AppendLine($"1. {first.Brand} {first.Model} {CarsPerformancePoints.First().Key}PP - ${this.FirstPrize}");
-            raceResults.AppendLine($"2. {second.Brand} {second.Model} {CarsPerformancePoints.Last().Key}PP - ${this.SecondPrize}");
+            Car first = carsPerformancePoints.First().Value;
+            Car second = carsPerformancePoints.Last().Value;
+            raceResults.AppendLine($"1. {first.Brand} {first.Model} {carsPerformancePoints.First().Key}PP - ${this.FirstPrize}");
+            raceResults.AppendLine($"2. {second.Brand} {second.Model} {carsPerformancePoints.Last().Key}PP - ${this.SecondPrize}");
         }
 
         else
         {
-            var orderedCars = CarsPerformancePoints.OrderByDescending(c => c.Key).Take(3).ToDictionary(c => c.Key, c => c.Value);
+            carsPerformancePoints = carsPerformancePoints.OrderByDescending(c => c.Key).Take(3).ToDictionary(c => c.Key, c => c.Value);
 
             var counter = 1;
-            foreach (var car in orderedCars)
+            foreach (var car in carsPerformancePoints)
             {
                 if (counter == 3)
                 {
