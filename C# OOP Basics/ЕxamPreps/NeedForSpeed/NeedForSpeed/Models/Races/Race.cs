@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 
 public abstract class Race : IPrize
 {
@@ -50,4 +52,46 @@ public abstract class Race : IPrize
         this.Cars[carId] = car;
     }
 
+    public string GetRaceResults(Dictionary<int, Car> CarsPerformancePoints)
+    {
+        StringBuilder raceResults = new StringBuilder();
+        raceResults.AppendLine($"{this.Route} - {this.Length}");
+
+        if (CarsPerformancePoints.Count == 1)
+        {
+            Car first = CarsPerformancePoints.First().Value;
+            raceResults.AppendLine($"1. {first.Brand} {first.Model} {CarsPerformancePoints.First().Key}PP - ${this.FirstPrize}");
+        }
+        else if (CarsPerformancePoints.Count == 2)
+        {
+            Car first = CarsPerformancePoints.First().Value;
+            Car second = CarsPerformancePoints.Last().Value;
+            raceResults.AppendLine($"1. {first.Brand} {first.Model} {CarsPerformancePoints.First().Key}PP - ${this.FirstPrize}");
+            raceResults.AppendLine($"2. {second.Brand} {second.Model} {CarsPerformancePoints.Last().Key}PP - ${this.SecondPrize}");
+        }
+
+        else
+        {
+            var orderedCars = CarsPerformancePoints.OrderByDescending(c => c.Key).Take(3).ToDictionary(c => c.Key, c => c.Value);
+
+            var counter = 1;
+            foreach (var car in orderedCars)
+            {
+                if (counter == 3)
+                {
+                    raceResults.AppendLine($"{counter++}. {car.Value.Brand} {car.Value.Model} {car.Key}PP - ${this.ThirdPrize}");
+                }
+                if (counter == 2)
+                {
+                    raceResults.AppendLine($"{counter++}. {car.Value.Brand} {car.Value.Model} {car.Key}PP - ${this.SecondPrize}");
+                }
+                if (counter == 1)
+                {
+                    raceResults.AppendLine($"{counter++}. {car.Value.Brand} {car.Value.Model} {car.Key}PP - ${this.FirstPrize}");
+                }
+            }
+        }
+
+        return raceResults.ToString().TrimEnd();
+    }
 }
