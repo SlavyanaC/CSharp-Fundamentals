@@ -16,4 +16,17 @@ public class RaceFactory
                 throw new ArgumentException();
         }
     }
+
+    public static Race CreateRace(string type, int length, string route, int prizePool, int additionalInfo)
+    {
+        switch (type)
+        {
+            case "TimeLimit":
+                return new TimeLimitRace(length, route, prizePool,additionalInfo);
+            case "Circuit":
+                return new CircuitRace(length, route, prizePool, additionalInfo);
+            default:
+                throw new ArgumentException();
+        }
+    }
 }

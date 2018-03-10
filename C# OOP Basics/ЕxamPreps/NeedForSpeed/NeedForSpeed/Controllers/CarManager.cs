@@ -13,7 +13,7 @@ public class CarManager
         this.garage = new Garage();
     }
 
-    public void Register(int id, string type, string brand, string model, int yearOfProduction, 
+    public void Register(int id, string type, string brand, string model, int yearOfProduction,
                          int horsepower, int acceleration, int suspension, int durability)
     {
         var car = CarFactory.CreateCar(type, brand, model, yearOfProduction, horsepower, acceleration, suspension,
@@ -32,6 +32,12 @@ public class CarManager
         races[id] = race;
     }
 
+    public void Open(int id, string type, int length, string route, int prizePool, int additionalInfo)
+    {
+        var race = RaceFactory.CreateRace(type, length, route, prizePool, additionalInfo);
+        races[id] = race;
+    }
+
     public void Participate(int carId, int raceId)
     {
         var car = cars[carId];
@@ -39,14 +45,17 @@ public class CarManager
 
         if (!garage.ParkedCars.ContainsKey(carId))
         {
-                race.Cars[carId] = car;
+            if (race.GetType().Name == "TimeLimitRace" && races[raceId].Cars.Count > 0)
+            {
+                return;
+            }
+            race.Cars[carId] = car;
         }
     }
 
     public string Start(int id)
     {
         var race = races[id];
-
         if (race.Cars.Count == 0)
         {
             return $"Cannot start the race with zero participants.";

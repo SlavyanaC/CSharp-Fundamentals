@@ -51,7 +51,13 @@ public class Engine
                 var length = int.Parse(commandArgs[3]);
                 var route = commandArgs[4];
                 var prizePool = int.Parse(commandArgs[5]);
-                this.manager.Open(idRace, raceType, length, route, prizePool);
+                if (commandArgs.Count == 7)
+                {
+                    var additionalInfo = int.Parse(commandArgs[6]);
+                    this.manager.Open(idRace, raceType, length, route, prizePool, additionalInfo);
+                }
+                else
+                    this.manager.Open(idRace, raceType, length, route, prizePool);
                 break;
             case "participate":
                 var carId = int.Parse(commandArgs[1]);

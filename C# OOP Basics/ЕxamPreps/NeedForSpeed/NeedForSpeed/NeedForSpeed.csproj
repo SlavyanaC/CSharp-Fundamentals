@@ -42,19 +42,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CarManager.cs" />
-    <Compile Include="Engine.cs" />
+    <Compile Include="Controllers\CarManager.cs" />
+    <Compile Include="Controllers\Engine.cs" />
     <Compile Include="Factories\CarFactory.cs" />
     <Compile Include="Factories\RaceFactory.cs" />
-    <Compile Include="Interfaces\IPrize.cs" />
+    <Compile Include="Interfaces\ICasualPrize.cs" />
+    <Compile Include="Interfaces\ICircuitRacePrize.cs" />
     <Compile Include="Models\Cars\Car.cs" />
     <Compile Include="Models\Cars\PerformanceCar.cs" />
     <Compile Include="Models\Cars\ShowCar.cs" />
     <Compile Include="Models\Garage.cs" />
     <Compile Include="Models\Races\CasualRace.cs" />
+    <Compile Include="Models\Races\CircuitRace.cs" />
     <Compile Include="Models\Races\DragRace.cs" />
     <Compile Include="Models\Races\DriftRace.cs" />
     <Compile Include="Models\Races\Race.cs" />
+    <Compile Include="Models\Races\TimeLimitRace.cs" />
     <Compile Include="StartUp.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Text;
 
-public abstract class Race : IPrize
+public abstract class Race : ICasualPrize
 {
     private int length;
     private string route;
@@ -41,11 +41,11 @@ public abstract class Race : IPrize
         set { cars = value; }
     }
 
-    public int FirstPrize => this.PrizePool * 50 / 100;
+    public virtual int FirstPrize => this.PrizePool * 50 / 100;
 
-    public int SecondPrize => this.PrizePool * 30 / 100;
+    public virtual int SecondPrize => this.PrizePool * 30 / 100;
 
-    public int ThirdPrize => this.PrizePool * 20 / 100;
+    public virtual int ThirdPrize => this.PrizePool * 20 / 100;
 
     public void AddCar(int carId, Car car)
     {

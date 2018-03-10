@@ -62,7 +62,7 @@ public abstract class Car
     public int Durability
     {
         get { return durability; }
-        protected set { durability = value; }
+        set { durability = value; }
     }
 
     public override string ToString()
