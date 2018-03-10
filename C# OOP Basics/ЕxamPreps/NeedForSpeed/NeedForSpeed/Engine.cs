@@ -4,79 +4,72 @@ using System.Linq;
 
 public class Engine
 {
-    private CarManager carManager;
+    private CarManager manager;
 
     public Engine()
     {
-        this.carManager = new CarManager();
+        this.manager = new CarManager();
     }
 
     public void Run()
     {
-        var inputLine = string.Empty;
-        while ((inputLine= Console.ReadLine())!= "Cops Are Here")
+        string inputCommand;
+        while ((inputCommand = Console.ReadLine()) != "Cops Are Here")
         {
-            var commandArgs = inputLine
-                .Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)
-                .ToList();
-            DistributeCommand(commandArgs);
+            var commandArgs = inputCommand
+                            .Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)
+                            .ToList();
+            DistributeCommands(commandArgs);
         }
     }
 
-    private void DistributeCommand(List<string> commandArgs)
+    private void DistributeCommands(List<string> commandArgs)
     {
         var command = commandArgs[0];
-        commandArgs = commandArgs.Skip(1).ToList();
+        commandArgs = commandArgs.ToList();
+
         switch (command)
         {
             case "register":
-                this.carManager.Register(int.Parse(commandArgs[0]),
-                                                   commandArgs[1], 
-                                                   commandArgs[2],
-                                                   commandArgs[3], 
-                                         int.Parse(commandArgs[4]), 
-                                         int.Parse(commandArgs[5]), 
-                                         int.Parse(commandArgs[6]), 
-                                         int.Parse(commandArgs[7]),
-                                         int.Parse(commandArgs[8]));
+                var id = int.Parse(commandArgs[1]);
+                var type = commandArgs[2];
+                var brand = commandArgs[3];
+                var model = commandArgs[4];
+                var year = int.Parse(commandArgs[5]);
+                var horsepower = int.Parse(commandArgs[6]);
+                var acceleration = int.Parse(commandArgs[7]);
+                var suspension = int.Parse(commandArgs[8]);
+                var durability = int.Parse(commandArgs[9]);
+                this.manager.Register(id, type, brand, model, year, horsepower, acceleration, suspension, durability);
                 break;
-
             case "check":
-                Console.WriteLine(carManager.Check(int.Parse(commandArgs[0])));
+                Console.WriteLine(this.manager.Check(int.Parse(commandArgs[1])));
                 break;
-
             case "open":
-                this.carManager.Open(int.Parse(commandArgs[0]),
-                                               commandArgs[1],
-                                    int.Parse(commandArgs[2]),
-                                              commandArgs[3],
-                                    int.Parse(commandArgs[4]));
+                var idRace = int.Parse(commandArgs[1]);
+                var raceType = commandArgs[2];
+                var length = int.Parse(commandArgs[3]);
+                var route = commandArgs[4];
+                var prizePool = int.Parse(commandArgs[5]);
+                this.manager.Open(idRace, raceType, length, route, prizePool);
                 break;
-
             case "participate":
-                this.carManager.Participate(int.Parse(commandArgs[0]),
-                                            int.Parse(commandArgs[1]));
+                var carId = int.Parse(commandArgs[1]);
+                var raceId = int.Parse(commandArgs[2]);
+                this.manager.Participate(carId, raceId);
                 break;
-
             case "start":
-                Console.WriteLine(carManager.Start(int.Parse(commandArgs[0])));
+                Console.WriteLine(this.manager.Start(int.Parse(commandArgs[1])));
                 break;
-
             case "park":
-                this.carManager.Park(int.Parse(commandArgs[0]));
+                this.manager.Park(int.Parse(commandArgs[1]));
                 break;
-
             case "unpark":
-                this.carManager.Unpark(int.Parse(commandArgs[0]));
+                this.manager.Unpark(int.Parse(commandArgs[1]));
                 break;
-
             case "tune":
-                this.carManager.Tune(int.Parse(commandArgs[0]),
-                                               commandArgs[1]);
+                this.manager.Tune(int.Parse(commandArgs[1]), commandArgs[2]);
                 break;
-
-            default:
-                throw new ArgumentException();
         }
     }
 }

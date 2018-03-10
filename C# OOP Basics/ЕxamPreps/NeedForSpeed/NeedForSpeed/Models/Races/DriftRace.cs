@@ -12,7 +12,7 @@ public class DriftRace : Race
         {
             foreach (var car in Cars.Values)
             {
-                var points = (car.Suspension / car.Durability);
+                var points = (car.Suspension + car.Durability);
                 CarsPerformancePoints[points] = car;
             }
         }

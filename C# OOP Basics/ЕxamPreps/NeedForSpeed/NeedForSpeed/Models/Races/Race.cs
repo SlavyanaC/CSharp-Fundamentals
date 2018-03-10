@@ -73,7 +73,7 @@ public abstract class Race : IPrize
 
         else
         {
-            carsPerformancePoints = carsPerformancePoints.OrderByDescending(c => c.Key).Take(3).ToDictionary(c => c.Key, c => c.Value);
+            carsPerformancePoints = carsPerformancePoints.Take(3).ToDictionary(c => c.Key, c => c.Value);
 
             var counter = 1;
             foreach (var car in carsPerformancePoints)

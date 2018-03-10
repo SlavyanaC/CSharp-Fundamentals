@@ -7,7 +7,7 @@ public class PerformanceCar : Car
         : base(brand, model, yearOfProduction, horsePower, acceleration, suspension, durability)
     {
         this.AddOns = new List<string>();
-        this.HorsePower += this.HorsePower * 50 / 100;
+        this.Horsepower += this.Horsepower * 50 / 100;
         this.Suspension -= this.Suspension * 25 / 100;
     }
 

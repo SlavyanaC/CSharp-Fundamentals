@@ -12,7 +12,7 @@ public class CasualRace : Race
         {
             foreach (var car in Cars.Values)
             {
-                var points = (car.HorsePower / car.Acceleration) + (car.Suspension + car.Durability);
+                var points = (car.Horsepower / car.Acceleration) + (car.Suspension + car.Durability);
                 CarsPerformancePoints[points] = car;
             }
         }

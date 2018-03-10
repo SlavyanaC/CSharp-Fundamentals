@@ -17,7 +17,7 @@ public abstract class Car
         this.Brand = brand;
         this.Model = model;
         this.YearOfProduction = yearOfProduction;
-        this.HorsePower = horsePower;
+        this.Horsepower = horsePower;
         this.Acceleration = acceleration;
         this.Suspension = suspension;
         this.Durability = durability;
@@ -41,7 +41,7 @@ public abstract class Car
         protected set { yearOfProduction = value; }
     }
 
-    public int HorsePower
+    public int Horsepower
     {
         get { return horsePower; }
         set { horsePower = value; }
@@ -69,7 +69,7 @@ public abstract class Car
     {
         StringBuilder builder = new StringBuilder();
         builder.AppendLine($"{this.Brand} {this.Model} {this.YearOfProduction}");
-        builder.AppendLine($"{this.HorsePower} HP, 100 m/h in {this.Acceleration} s");
+        builder.AppendLine($"{this.Horsepower} HP, 100 m/h in {this.Acceleration} s");
         builder.AppendLine($"{this.Suspension} Suspension force, {this.Durability} Durability");
 
         return builder.ToString().TrimEnd();

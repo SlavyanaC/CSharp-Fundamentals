@@ -1,94 +1,99 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 public class CarManager
 {
-    private Dictionary<int, Car> cars = new Dictionary<int, Car>();
-    private Dictionary<int, Race> races = new Dictionary<int, Race>();
-    private Garage garage = new Garage();
+    private readonly Dictionary<int, Car> cars;
+    private readonly Dictionary<int, Race> races;
+    private Garage garage;
 
-    public void Register(int id, string type, string brand, string model, int yearOfProduction, int horsepower, int acceleration, int suspension, int durability)
+    public CarManager()
     {
-        var car = CarFactory.CreateCar(type, brand, model, yearOfProduction, horsepower, acceleration, suspension, durability);
-        this.cars[id] = car;
+        this.cars = new Dictionary<int, Car>();
+        this.races = new Dictionary<int, Race>();
+        this.garage = new Garage();
+    }
+
+    public void Register(int id, string type, string brand, string model, int yearOfProduction, 
+                         int horsepower, int acceleration, int suspension, int durability)
+    {
+        var car = CarFactory.CreateCar(type, brand, model, yearOfProduction, horsepower, acceleration, suspension,
+            durability);
+        cars[id] = car;
     }
 
     public string Check(int id)
     {
-        var wantedCar = cars[id];
-        return wantedCar.ToString();
+        return cars[id].ToString().Trim();
     }
 
     public void Open(int id, string type, int length, string route, int prizePool)
     {
         var race = RaceFactory.CreateRace(type, length, route, prizePool);
-        this.races[id] = race;
+        races[id] = race;
     }
 
     public void Participate(int carId, int raceId)
     {
-        if (garage.ParkedCars.ContainsKey(carId))
-        {
-            return;
-        }
         var car = cars[carId];
         var race = races[raceId];
-        race.AddCar(carId, car);
+
+        if (!garage.ParkedCars.ContainsKey(carId))
+        {
+                race.Cars[carId] = car;
+        }
     }
 
     public string Start(int id)
     {
-        if (this.races[id].Cars.Count > 0)
+        var race = races[id];
+
+        if (race.Cars.Count == 0)
         {
-            var race = races[id];
-            this.races.Remove(id);
-            return race.ToString();
+            return $"Cannot start the race with zero participants.";
         }
-        return "Cannot start the race with zero participants.";
+
+        this.races.Remove(id);
+        return race.ToString();
     }
 
     public void Park(int id)
     {
-        foreach (var race in races.Values)
+        foreach (var race in races)
         {
-            if (race.Cars.ContainsKey(id))
+            if (race.Value.Cars.ContainsKey(id))
             {
                 return;
             }
         }
-
-        var car = this.cars[id];
-        this.garage.ParkCar(id, car);
+        var car = cars[id];
+        garage.ParkedCars.Add(id, car);
     }
 
     public void Unpark(int id)
     {
-        this.garage.UnparkCar(id);
+        garage.ParkedCars.Remove(id);
     }
 
     public void Tune(int tuneIndex, string addOn)
     {
-        if (garage.ParkedCars.Count > 0)
+        var parkedCars = garage.ParkedCars;
+
+        foreach (var parkedCar in parkedCars)
         {
-            var parkedCars = garage.ParkedCars;
-            foreach (var parkedCar in parkedCars)
+            var carName = parkedCar.Value.GetType().Name;
+            parkedCar.Value.Horsepower += tuneIndex;
+            parkedCar.Value.Suspension += tuneIndex / 2;
+
+            switch (carName)
             {
-                var carName = parkedCar.Value.GetType().Name;
-                parkedCar.Value.HorsePower += tuneIndex;
-                parkedCar.Value.Suspension += (tuneIndex / 2);
-                switch (carName)
-                {
-                    case "ShowCar":
-                        var currentCar = (ShowCar)parkedCar.Value;
-                        currentCar.Stars += tuneIndex;
-                        break;
-                    case "PerformanceCar":
-                        var currentCarr = (PerformanceCar)parkedCar.Value;
-                        currentCarr.AddOns.Add(addOn);
-                        break;
-                    default:
-                        throw new ArgumentException();
-                }
+                case "ShowCar":
+                    var currentCar = (ShowCar)parkedCar.Value;
+                    currentCar.Stars += tuneIndex;
+                    break;
+                case "PerformanceCar":
+                    var performanceCar = (PerformanceCar)parkedCar.Value;
+                    performanceCar.AddOns.Add(addOn);
+                    break;
             }
         }
     }

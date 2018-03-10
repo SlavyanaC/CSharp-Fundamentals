@@ -12,7 +12,7 @@ public class DragRace : Race
         {
             foreach (var car in Cars.Values)
             {
-                var points = (car.HorsePower / car.Acceleration);
+                var points = (car.Horsepower / car.Acceleration);
                 CarsPerformancePoints[points] = car;
             }
         }
