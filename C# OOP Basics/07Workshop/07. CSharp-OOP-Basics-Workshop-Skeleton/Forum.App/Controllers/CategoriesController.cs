@@ -1,25 +1,21 @@
-﻿using System.Linq;
-using Forum.App.UserInterface.ViewModels;
-using Forum.App.Views;
-using Forum.Models;
-
-namespace Forum.App.Controllers
+﻿namespace Forum.App.Controllers
 {
-    using System;
+    using System.Linq;
+    using Forum.App.Views;
     using Forum.App.Controllers.Contracts;
-    using Forum.App.Services;
     using Forum.App.UserInterface.Contracts;
+    using Forum.App.Services;
 
     public class CategoriesController : IController, IPaginationController
     {
+        public const int PAGE_OFFSET = 10;
+        private const int COMMAND_COUNT = PAGE_OFFSET + 3;
+
         public CategoriesController()
         {
             CurrentPage = 0;
             LoadCategories();
         }
-
-        public const int PAGE_OFFSET = 10;
-        private const int COMMAND_COUNT = PAGE_OFFSET + 3;
 
         public int CurrentPage { get; set; }
 

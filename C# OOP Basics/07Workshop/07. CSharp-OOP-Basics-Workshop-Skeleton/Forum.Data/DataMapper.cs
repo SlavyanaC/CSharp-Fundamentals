@@ -15,22 +15,23 @@ namespace Forum.Data
         }
 
         private const string DATA_PATH = "../data/";
-
         private const string CONFIG_PATH = "config.ini";
-
         private const string DEFAULT_PATH =
             "users=users.csv\r\ncategories=categories.csv\r\nposts=posts.csv\r\nreplies=replies.csv";
         private static readonly Dictionary<string, string> config;
+
         private static void EnsureConfigFile(string configPath)
         {
             if (!File.Exists(configPath))
                 File.WriteAllText(configPath, DEFAULT_PATH);
         }
+
         private static void EnsureFile(string path)
         {
             if (!File.Exists(path))
                 File.Create(path).Close();
         }
+
         private static Dictionary<string, string> LoadConfig(string configPath)
         {
             EnsureConfigFile(configPath);
@@ -38,16 +39,19 @@ namespace Forum.Data
             var config = content.Select(x => x.Split('=')).ToDictionary(k => k[0], t => DATA_PATH + t[1]);
             return config;
         }
+
         private static string[] ReadLines(string path)
         {
             EnsureFile(path);
             var lines = File.ReadAllLines(path);
             return lines;
         }
+
         private static void WriteLines(string path, string[] lines)
         {
             File.WriteAllLines(path, lines);
         }
+
         public static List<Category> LoadCategories()
         {
             List<Category> categories = new List<Category>();
@@ -66,6 +70,7 @@ namespace Forum.Data
             }
             return categories;
         }
+
         public static void SaveCategories(List<Category> categories)
         {
             List<string> lines = new List<string>();
@@ -93,10 +98,6 @@ namespace Forum.Data
                 var id = int.Parse(args[0]);
                 var username = args[1];
                 var password = args[2];
-                // var postIds = args[3]
-                //     .Split(',', StringSplitOptions.RemoveEmptyEntries)
-                //     .Select(int.Parse)
-                //     .ToArray();
 
                 User user = new User(id, username, password);
                 users.Add(user);
@@ -120,6 +121,7 @@ namespace Forum.Data
 
                 lines.Add(line);
             }
+
             WriteLines(config["users"], lines.ToArray());
         }
 
@@ -144,6 +146,7 @@ namespace Forum.Data
                 Post post = new Post(id, title, content, categoryId, authorId, repliesIds);
                 posts.Add(post);
             }
+
             return posts;
         }
 
@@ -165,6 +168,7 @@ namespace Forum.Data
 
                 lines.Add(line);
             }
+
             WriteLines(config["posts"], lines.ToArray());
         }
 
@@ -184,6 +188,7 @@ namespace Forum.Data
                 Reply reply = new Reply(id, content, authorId, postId);
                 replies.Add(reply);
             }
+
             return replies;
         }
 
@@ -203,6 +208,7 @@ namespace Forum.Data
 
                 lines.Add(line);
             }
+
             WriteLines(config["replies"], lines.ToArray());
         }
     }

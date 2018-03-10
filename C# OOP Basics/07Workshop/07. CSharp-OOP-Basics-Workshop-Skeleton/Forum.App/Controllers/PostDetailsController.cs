@@ -1,14 +1,11 @@
-﻿using System;
-using Forum.App.UserInterface;
-using Forum.App.UserInterface.ViewModels;
-using Forum.App.Views;
-
-namespace Forum.App.Controllers
+﻿namespace Forum.App.Controllers
 {
+    using Forum.App.UserInterface;
+    using Forum.App.UserInterface.ViewModels;
+    using Forum.App.Views;
     using Forum.App.Controllers.Contracts;
-    using Forum.App.Services;
     using Forum.App.UserInterface.Contracts;
-
+    using Forum.App.Services;
 
     public class PostDetailsController : IController, IUserRestrictedController
     {

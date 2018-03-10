@@ -1,27 +1,26 @@
-﻿using System;
-using System.Linq;
-using Forum.App.UserInterface;
-using Forum.App.UserInterface.Input;
-using Forum.App.UserInterface.ViewModels;
-
-namespace Forum.App.Controllers
+﻿namespace Forum.App.Controllers
 {
+    using System.Linq;
+    using Forum.App.UserInterface;
+    using Forum.App.UserInterface.Input;
+    using Forum.App.UserInterface.ViewModels;
     using Forum.App.Controllers.Contracts;
     using Forum.App.UserInterface.Contracts;
+    using Forum.App.Services;
 
     public class AddPostController : IController
     {
-        public AddPostController()
-        {
-            ResetPost();
-        }
-
         private const int COMMAND_COUNT = 4;
         private const int TEXT_AREA_WIDTH = 37;
         private const int TEXT_AREA_HEIGHT = 18;
         private const int POST_MAX_LENGTH = 660;
         private static int centerTop = Position.ConsoleCenter().Top;
         private static int centerLeft = Position.ConsoleCenter().Left;
+
+        public AddPostController()
+        {
+            ResetPost();
+        }
 
         public PostViewModel Post { get; set; }
 
