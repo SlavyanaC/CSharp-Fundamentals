@@ -42,8 +42,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CommandInterpreter.cs" />
-    <Compile Include="DraftManager.cs" />
+    <Compile Include="Controllers\Engine.cs" />
+    <Compile Include="Controllers\DraftManager.cs" />
     <Compile Include="Factories\HarvesterFactory.cs" />
     <Compile Include="Factories\ProviderFactory.cs" />
     <Compile Include="Models\Harvesters\HammerHarvester.cs" />

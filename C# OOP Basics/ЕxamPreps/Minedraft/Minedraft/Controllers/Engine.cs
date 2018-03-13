@@ -2,16 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 
-public class CommandInterpreter
+public class Engine
 {
-    private bool isRunning;
-    private DraftManager draftManager;
-
-    public CommandInterpreter()
-    {
-        this.isRunning = true;
-        this.draftManager = new DraftManager();
-    }
+    private bool isRunning = true;
+    private DraftManager draftManager = new DraftManager();
 
     public void Run()
     {

@@ -4,7 +4,7 @@
     {
         static void Main(string[] args)
         {
-            CommandInterpreter commandInterpreter = new CommandInterpreter();
+            Engine commandInterpreter = new Engine();
             commandInterpreter.Run();
         }
     }
