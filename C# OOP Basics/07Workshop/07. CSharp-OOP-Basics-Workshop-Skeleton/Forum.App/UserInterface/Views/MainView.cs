@@ -52,7 +52,7 @@
 
         private void InitializeStaticLabels(Position consoleCenter)
         {
-            string[] labelContents = new string[] 
+            string[] labelContents = new string[]
             {
             //@"
             //▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄

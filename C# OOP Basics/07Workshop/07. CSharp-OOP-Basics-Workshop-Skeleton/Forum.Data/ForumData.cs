@@ -1,8 +1,8 @@
-﻿namespace Forum.Data
-{
-    using Forum.Models;
-    using System.Collections.Generic;
+﻿using Forum.Models;
+using System.Collections.Generic;
 
+namespace Forum.Data
+{
     public class ForumData
     {
         public ForumData()

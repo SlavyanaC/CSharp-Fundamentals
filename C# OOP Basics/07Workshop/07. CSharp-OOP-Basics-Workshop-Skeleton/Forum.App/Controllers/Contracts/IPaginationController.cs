@@ -1,6 +1,6 @@
 ﻿namespace Forum.App.Controllers.Contracts
 {
-    interface IPaginationController
+    internal interface IPaginationController
     {
         int CurrentPage { get; set; }
     }

@@ -1,10 +1,10 @@
 ﻿namespace Forum.App.Views
 {
+    using Forum.App.UserInterface.Contracts;
     using System.Collections.Generic;
     using System.Linq;
-    using Forum.App.UserInterface.Contracts;
 
-    class CategoriesView : IView
+    internal class CategoriesView : IView
     {
         public CategoriesView(string[] categoryNames, bool isFirstPage = false, bool isLastPage = false)
         {
@@ -35,7 +35,7 @@
             string[] defaultButtonContent = new string[] { "Back", "Previous Page", "Next Page" };
             Position[] defaultButtonPositions = new Position[]
             {
-                new Position(consoleCenter.Left + 15, consoleCenter.Top - 12), // Back   
+                new Position(consoleCenter.Left + 15, consoleCenter.Top - 12), // Back
                 new Position(consoleCenter.Left - 18, consoleCenter.Top + 12), // Previous Page
                 new Position(consoleCenter.Left + 10, consoleCenter.Top + 12), // Next Page
             };

@@ -33,7 +33,7 @@
 
             Position[] labelPositions = new Position[]
             {
-                new Position(consoleCenter.Left - 16, consoleCenter.Top - 13),   // Error: 
+                new Position(consoleCenter.Left - 16, consoleCenter.Top - 13),   // Error:
                 new Position(consoleCenter.Left - 16, consoleCenter.Top - 10),   // Name:
                 new Position(consoleCenter.Left - 16, consoleCenter.Top - 8),    // Password:
             };

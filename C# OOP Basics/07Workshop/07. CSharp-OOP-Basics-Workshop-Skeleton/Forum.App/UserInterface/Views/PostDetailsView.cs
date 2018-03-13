@@ -1,10 +1,9 @@
 ﻿namespace Forum.App.Views
 {
-    using System.Collections.Generic;
-
     using Forum.App.UserInterface;
     using Forum.App.UserInterface.Contracts;
     using Forum.App.UserInterface.ViewModels;
+    using System.Collections.Generic;
 
     public class PostDetailsView : IView
     {

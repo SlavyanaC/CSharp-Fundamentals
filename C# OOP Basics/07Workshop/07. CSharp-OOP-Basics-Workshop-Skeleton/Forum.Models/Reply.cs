@@ -4,10 +4,10 @@
     {
         public Reply(int id, string content, int authorId, int postId)
         {
-            this.Id = id;
-            this.Content = content;
-            this.AuthorId = authorId;
-            this.PostId = PostId;
+            Id = id;
+            Content = content;
+            AuthorId = authorId;
+            PostId = postId;
         }
 
         public int Id { get; set; }

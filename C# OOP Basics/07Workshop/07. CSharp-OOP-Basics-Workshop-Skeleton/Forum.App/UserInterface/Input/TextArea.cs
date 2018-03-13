@@ -1,9 +1,9 @@
 ﻿namespace Forum.App.UserInterface.Input
 {
+    using Forum.App.UserInterface.Contracts;
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using Forum.App.UserInterface.Contracts;
 
     public class TextArea : IInput
     {
@@ -115,6 +115,5 @@
             }
             this.lines = StringProcessor.Split(this.Text);
         }
-
     }
 }

@@ -2,7 +2,7 @@
 {
     using Forum.App.UserInterface.Contracts;
 
-    class SignUpView : IView
+    internal class SignUpView : IView
     {
         public SignUpView(string errorMessage)
         {

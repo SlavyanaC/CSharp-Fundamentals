@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Forum.App
 {
@@ -20,6 +18,7 @@ namespace Forum.App
             get { return top; }
             set { top = value; }
         }
+
         public int Left
         {
             get { return left; }

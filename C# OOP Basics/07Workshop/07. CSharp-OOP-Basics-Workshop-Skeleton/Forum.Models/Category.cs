@@ -10,7 +10,6 @@
             this.Name = name;
             this.Posts = new List<int>();
         }
-
         public Category(int id, string name, IEnumerable<int> posts)
             : this(id, name)
         {

@@ -1,7 +1,7 @@
-﻿namespace Forum.Models
-{
-    using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
+namespace Forum.Models
+{
     public class Post
     {
         public Post(int id, string title, string content, int categoryId, int authorId)

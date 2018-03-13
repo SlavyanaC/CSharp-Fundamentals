@@ -1,13 +1,13 @@
 ﻿namespace Forum.App
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
     using Forum.App.Controllers;
     using Forum.App.Controllers.Contracts;
     using Forum.App.Services;
     using Forum.App.UserInterface;
     using Forum.App.UserInterface.Contracts;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
 
     internal class MenuController
     {
@@ -104,31 +104,39 @@
                 case MenuState.PostAdded:
                     AddPost();
                     break;
+
                 case MenuState.OpenCategory:
                     OpenCategory();
                     break;
+
                 case MenuState.ViewPost:
                     ViewPost();
                     break;
+
                 case MenuState.SuccessfulLogIn:
                     SuccessfulLogin();
                     break;
+
                 case MenuState.LoggedOut:
                     LogOut();
                     break;
+
                 case MenuState.Back:
                     this.Back();
                     break;
-                case MenuState.Error:
+
                 case MenuState.Rerender:
                     RenderCurrentView();
                     break;
+
                 case MenuState.AddReplyToPost:
                     RedirectToAddReply();
                     break;
+
                 case MenuState.ReplyAdded:
                     AddReply();
                     break;
+
                 default:
                     this.RedirectToMenu(newState);
                     break;
@@ -137,81 +145,78 @@
 
         private void AddReply()
         {
-            var addReplyController = (AddReplyController)CurrentController;
-            var postId = addReplyController.PostId;
 
-            var viewPostController = (PostDetailsController)controllers[(int)MenuState.ViewPost];
-            viewPostController.SetPostId(postId);
-
-            Back();
+            this.Back();
         }
 
         private void RedirectToAddReply()
         {
-            var viewPostController = (PostDetailsController)CurrentController;
-            var postId = viewPostController.PostId;
-            var addReplyController = (AddReplyController)controllers[(int)MenuState.AddReply];
+            var postDetailsController = (PostDetailsController)this.CurrentController;
 
-            addReplyController.SetReplyToPost(postId, Username);
-
+            var addReplyController = (AddReplyController)this.controllers[(int)MenuState.AddReply];
+            addReplyController.SetPostId(postDetailsController.PostId);
             RedirectToMenu(MenuState.AddReply);
         }
 
         private void LogOut()
         {
-            Username = string.Empty;
-            LogOutUser();
-            RenderCurrentView();
+            this.Username = string.Empty;
+            this.LogOutUser();
+            this.RenderCurrentView();
         }
 
         private void SuccessfulLogin()
         {
-            var loginController = (IReadUserInfoController)CurrentController;
-            Username = loginController.Username;
-            LogInUser();
+            var loginController = (IReadUserInfoController)this.CurrentController;
+            this.Username = loginController.Username;
+
+            this.LogInUser();
             RedirectToMenu(MenuState.Main);
         }
 
         private void ViewPost()
         {
-            var categoryController = (CategoryController)CurrentController;
+            var categoryController = (CategoryController)this.CurrentController;
+
             int categoryId = categoryController.CategoryId;
+
             var posts = PostService.GetPostsByCategory(categoryId).ToArray();
 
-            int postIndex = categoryController.CurrentPage * CategoryController.PAGE_OFFSET + currentOptionIndex;
+            int postIndex = categoryController.CurrentPage * CategoriesController.PAGE_OFFSET + this.currentOptionIndex;
             var postId = posts[postIndex - 1].Id;
 
-            var postController = (PostDetailsController)controllers[(int)MenuState.ViewPost];
+            var postController = (PostDetailsController)this.controllers[(int)MenuState.ViewPost];
             postController.SetPostId(postId);
 
-            RedirectToMenu(MenuState.ViewPost);
+            this.RedirectToMenu(MenuState.ViewPost);
         }
 
         private void OpenCategory()
         {
-            var categoriesController = (CategoriesController)CurrentController;
+            var categoriesController = (CategoriesController)this.CurrentController;
 
-            int categoryIndex = categoriesController.CurrentPage * CategoriesController.PAGE_OFFSET +
-                                currentOptionIndex;
+            int categoryIndex = categoriesController.CurrentPage * CategoriesController.PAGE_OFFSET + this.currentOptionIndex;
 
-            var categoryCtrlr = (CategoryController)controllers[(int)MenuState.OpenCategory];
+            var categoryCtrlr = (CategoryController)this.controllers[(int)MenuState.OpenCategory];
             categoryCtrlr.SetCategory(categoryIndex);
 
-            RedirectToMenu(MenuState.OpenCategory);
+            this.RedirectToMenu(MenuState.OpenCategory);
         }
 
         private void AddPost()
         {
-            var addPostController = (AddPostController)CurrentController;
-            var postId = addPostController.Post.PostId;
-            var postViewer = (PostDetailsController)controllers[(int)MenuState.ViewPost];
+            var addPostController = (AddPostController)this.CurrentController;
+
+            int postId = addPostController.Post.PostId;
+
+            var postViewer = (PostDetailsController)this.controllers[(int)MenuState.ViewPost];
             postViewer.SetPostId(postId);
 
             addPostController.ResetPost();
 
-            controllerHistory.Pop();
+            this.controllerHistory.Pop();
 
-            RedirectToMenu(MenuState.ViewPost);
+            this.RedirectToMenu(MenuState.ViewPost);
         }
 
         private void RenderCurrentView()
@@ -229,12 +234,13 @@
                 this.RenderCurrentView();
                 return true;
             }
+
             return false;
         }
 
         private void LogInUser()
         {
-            foreach (var controller in controllers)
+            foreach (var controller in this.controllers)
             {
                 if (controller is IUserRestrictedController userRestrictedController)
                 {
@@ -245,7 +251,7 @@
 
         private void LogOutUser()
         {
-            foreach (var controller in controllers)
+            foreach (var controller in this.controllers)
             {
                 if (controller is IUserRestrictedController userRestrictedController)
                 {
