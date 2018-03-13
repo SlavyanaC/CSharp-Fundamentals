@@ -16,19 +16,19 @@
     public string Name
     {
         get { return name; }
-        private set { name = value; }
+        protected set { name = value; }
     }
 
     public double TotalTime
     {
         get { return totalTime; }
-        set { totalTime = value; }
+        internal set { totalTime = value; }
     }
 
     public Car Car
     {
         get { return car; }
-        private set { car = value; }
+        protected set { car = value; }
     }
 
     public double FuelConsumptionPerKm
@@ -37,21 +37,10 @@
         protected set { fuelConsumptionPerKm = value; }
     }
 
-    public virtual double Speed => this.CalculateSpeed();
-
-    public double CalculateSpeed()
-    {
-        var speed = (this.Car.Horsepower + this.Car.Tyre.Degradation) / this.Car.FuelAmount;
-        return speed;
-    }
+    public virtual double Speed => (this.Car.Horsepower + this.Car.Tyre.Degradation) / this.Car.FuelAmount;
 
     public void IncreasTotalTime(int trackLenght)
     {
         this.TotalTime += 60 / (trackLenght / this.Speed);
-    }
-
-    public void ReduceFuelAmount(int trackLenght)
-    {
-        this.Car.FuelAmount -= trackLenght * this.FuelConsumptionPerKm;
     }
 }

@@ -9,6 +9,7 @@ public class RaceTower
     private Dictionary<Driver, string> failedDrivers = new Dictionary<Driver, string>();
     private int currentLap;
     private string weather = "Sunny";
+    public bool isEndOfRace = false;
 
     public int TotalLaps { get; set; }
     public int TrackLenght { get; set; }
@@ -73,8 +74,6 @@ public class RaceTower
             return ae.Message;
         }
 
-        var builder = new StringBuilder();
-
         for (int currLap = 0; currLap < numberOfLaps; currLap++)
         {
             ExecuteLapOperations();
@@ -85,11 +84,12 @@ public class RaceTower
         currentLap += numberOfLaps;
         if (currentLap == this.TotalLaps)
         {
+            this.isEndOfRace = true;
             Driver winner = drivers.Keys.OrderBy(d => d.TotalTime).First();
             return $"{winner.Name} wins the race for {winner.TotalTime:F3} seconds.";
         }
 
-        return builder.ToString().Trim();
+        return string.Empty;
     }
 
     private void ExecuteLapOperations()
@@ -100,7 +100,7 @@ public class RaceTower
             try
             {
                 driver.IncreasTotalTime(this.TrackLenght);
-                driver.ReduceFuelAmount(this.TrackLenght);
+                driver.Car.ReduceFuelAmount(this.TrackLenght, driver.FuelConsumptionPerKm);
                 driver.Car.Tyre.ReduceDegradation();
             }
             catch (ArgumentException ae)
@@ -114,16 +114,14 @@ public class RaceTower
     private void CheckForOvertaking(List<Driver> orderedDrivers, int currLap)
     {
         var timeInterval = 2;
-
         for (int i = 0; i < orderedDrivers.Count - 1; i++)
         {
             var firstDriver = orderedDrivers[i];
             var secondDriver = orderedDrivers[i + 1];
             var diff = Math.Abs(firstDriver.TotalTime - secondDriver.TotalTime);
 
-            bool isSpacialcase = CheckForSpecialCases(firstDriver, secondDriver, ref timeInterval);
-
-            if (!isSpacialcase && diff <= timeInterval)
+            bool driverHasCrashed = CheckIfDriverHasCrashed(firstDriver, ref timeInterval);
+            if (!driverHasCrashed && diff <= timeInterval)
             {
                 firstDriver.TotalTime -= timeInterval;
                 secondDriver.TotalTime += timeInterval;
@@ -132,7 +130,7 @@ public class RaceTower
         }
     }
 
-    private bool CheckForSpecialCases(Driver firstDriver, Driver secondDriver, ref int timeInterval)
+    private bool CheckIfDriverHasCrashed(Driver firstDriver, ref int timeInterval)
     {
         if (firstDriver.GetType().Name == "AggressiveDriver" && firstDriver.Car.Tyre.GetType().Name == "UltrasoftTyre")
         {
@@ -179,6 +177,9 @@ public class RaceTower
 
     public void ChangeWeather(List<string> commandArgs)
     {
-        this.weather = commandArgs[0];
+        if (commandArgs[0] == "Sunny" || commandArgs[0] == "Rainy" || commandArgs[0] == "Foggy")
+        {
+            this.weather = commandArgs[0];
+        }
     }
 }

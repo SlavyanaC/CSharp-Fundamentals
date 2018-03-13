@@ -36,8 +36,7 @@ public class Engine
                     if (!string.IsNullOrWhiteSpace(result))
                     {
                         Console.WriteLine(result);
-                        var resulLength = result.Split(' ');
-                        if (resulLength[1] == "wins")
+                        if (this.raceTower.isEndOfRace)
                         {
                             return;
                         }

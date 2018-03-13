@@ -14,12 +14,12 @@ public class Car
         this.Tyre = tyre;
     }
 
-    public int Horsepower { get; }
+    public int Horsepower { get; private set; }
 
     public double FuelAmount
     {
         get { return fuelAmount; }
-        set
+        private set
         {
             if (value < 0)
             {
@@ -44,5 +44,14 @@ public class Car
     public void Refuel(double newFuelAmount)
     {
         this.FuelAmount += newFuelAmount;
+    }
+
+    public void ReduceFuelAmount(int trackLenght, double fuelConsumptionPerKm)
+    {
+        this.FuelAmount -= trackLenght * fuelConsumptionPerKm;
+        if (this.FuelAmount > MAXIMUM_TANK_CAPACITY)
+        {
+            this.FuelAmount = MAXIMUM_TANK_CAPACITY;
+        }
     }
 }
