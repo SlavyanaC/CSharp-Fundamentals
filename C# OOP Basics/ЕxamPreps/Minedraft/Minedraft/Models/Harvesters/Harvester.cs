@@ -41,12 +41,13 @@ public abstract class Harvester : Worker
         }
     }
 
+    public string Name => this.GetType().Name.Equals("SonicHarvester") ? "Sonic" : "Hammer";
+
     public override string ToString()
     {
-        var typeName = GetType().Name.Equals("SonicHarvester") ? "Sonic" : "Hammer";
 
         StringBuilder builder = new StringBuilder();
-        builder.AppendLine($"{typeName} Harvester - {this.Id}");
+        builder.AppendLine($"{this.Name} Harvester - {this.Id}");
         builder.AppendLine($"Ore Output: {(int)this.OreOutput}");
         builder.AppendLine($"Energy Requirement: {(int)this.EnergyRequirement}");
 

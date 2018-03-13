@@ -26,12 +26,12 @@ public abstract class Provider : Worker
         }
     }
 
+    public string Name => this.GetType().Name.Equals("PressureProvider") ? "Pressure" : "Solar";
+
     public override string ToString()
     {
-        var typeName = GetType().Name.Equals("SolarProvider") ? "Solar" : "Pressure";
-
         StringBuilder builder = new StringBuilder();
-        builder.AppendLine($"{typeName} Provider - {this.Id}");
+        builder.AppendLine($"{this.Name} Provider - {this.Id}");
         builder.AppendLine($"Energy Output: {(int)this.EnergyOutput}");
 
         return builder.ToString().TrimEnd();

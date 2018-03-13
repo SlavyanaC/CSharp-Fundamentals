@@ -18,7 +18,7 @@ public class DraftManager
         {
             var harvester = HarvesterFactory.CreateHarvester(arguments);
             harvesters.Add(harvester);
-            return $"Successfully registered Sonic Harvester - {harvester.Id}";
+            return $"Successfully registered {harvester.Name} Harvester - {harvester.Id}";
         }
         catch (ArgumentException exception)
         {
@@ -32,8 +32,7 @@ public class DraftManager
         {
             var provider = ProviderFactory.CreateProvider(arguments);
             providers.Add(provider);
-            var type = arguments[0];
-            return $"Successfully registered {type} Provider - {provider.Id}";
+            return $"Successfully registered {provider.Name} Provider - {provider.Id}";
         }
         catch (ArgumentException exception)
         {
@@ -44,26 +43,25 @@ public class DraftManager
     public string Day()
     {
         double dailyProvidedEnergy = this.providers.Sum(p => p.EnergyOutput);
+        this.totalStoredEnergy += dailyProvidedEnergy;
         double requiredEnergyPerMode = 0;
         double minedOrePerMode = 0;
         double dailyMinedOre = 0;
-
-        switch (this.mode)
+    
+        if (this.mode != "Energy")
         {
-            case "Full":
-                requiredEnergyPerMode = this.harvesters.Sum(h => h.EnergyRequirement);
-                minedOrePerMode = this.harvesters.Sum(h => h.OreOutput);
-                break;
-            case "Half":
-                requiredEnergyPerMode = this.harvesters.Sum(h => h.EnergyRequirement * 0.6);
-                minedOrePerMode = this.harvesters.Sum(h => h.OreOutput * 0.5);
-                break;
-        }
+            switch (this.mode)
+            {
+                case "Full":
+                    requiredEnergyPerMode = this.harvesters.Sum(h => h.EnergyRequirement);
+                    minedOrePerMode = this.harvesters.Sum(h => h.OreOutput);
+                    break;
+                case "Half":
+                    requiredEnergyPerMode = this.harvesters.Sum(h => h.EnergyRequirement * 0.6);
+                    minedOrePerMode = this.harvesters.Sum(h => h.OreOutput * 0.5);
+                    break;
+            }
 
-        this.totalStoredEnergy += dailyProvidedEnergy;
-
-        if (!this.mode.Equals("Energy"))
-        {
             if (requiredEnergyPerMode <= this.totalStoredEnergy)
             {
                 this.totalStoredEnergy -= requiredEnergyPerMode;
@@ -89,14 +87,18 @@ public class DraftManager
     public string Check(List<string> arguments)
     {
         var id = arguments[0];
-        if (harvesters.Any(x => x.Id == id))
+
+        var harvester = harvesters.FirstOrDefault(h => h.Id == id);
+        if (harvester != null)
         {
-            return harvesters.First(x => x.Id == id).ToString();
+            return harvester.ToString();
         }
 
-        if (providers.Any(x => x.Id == id))
+
+        var provider = providers.FirstOrDefault(p => p.Id == id);
+        if (provider != null)
         {
-            return providers.First(x => x.Id == id).ToString();
+            return provider.ToString();
         }
 
         return $"No element found with id - {id}";
