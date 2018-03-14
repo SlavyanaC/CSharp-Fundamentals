@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 public class Nation
 {
@@ -13,7 +11,7 @@ public class Nation
     {
         double bendersPower = this.benders.Sum(b => b.GetPower());
         int monumentAffinity = this.monuments.Sum(m => m.GetAffinity());
-        var totalPower = (bendersPower / 100) * monumentAffinity;
+        var totalPower = bendersPower + (bendersPower / 100) * monumentAffinity;
 
         return totalPower;
     }

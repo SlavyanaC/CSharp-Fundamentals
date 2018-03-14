@@ -30,10 +30,9 @@ public class NationsBuilder
 
     public string GetStatus(string nationsType)
     {
-        Nation nation = nations.FirstOrDefault(n => n.Key == nationsType).Value;
         var builder = new StringBuilder();
         builder.AppendLine($"{nationsType} Nation");
-        builder.AppendLine(nation.ToString());
+        builder.AppendLine(nations[nationsType].ToString());
 
         return builder.ToString().TrimEnd();
     }
