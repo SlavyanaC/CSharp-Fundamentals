@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 public class PawsMenager
 {
     private Dictionary<Centre, List<Animal>> centres;
     private List<Animal> adoptedAnimals;
     private List<Animal> cleansedAnimals;
+    private List<Animal> castratedAnimals;
 
     private AnimalFactory animalFactory;
     private CentreFactory centreFactory;
@@ -18,6 +17,7 @@ public class PawsMenager
         this.centres = new Dictionary<Centre, List<Animal>>();
         this.adoptedAnimals = new List<Animal>();
         this.cleansedAnimals = new List<Animal>();
+        this.castratedAnimals = new List<Animal>();
         this.animalFactory = new AnimalFactory();
         this.centreFactory = new CentreFactory();
     }
@@ -34,6 +34,13 @@ public class PawsMenager
         AdoptionCenter adoptionCenter = (AdoptionCenter)this.centreFactory
             .Create("adoption", args[0]);
         this.centres[adoptionCenter] = new List<Animal>();
+    }
+
+    public void RegisterCastrationCenter(List<string> args)
+    {
+        CastrationCenter castrationCenter = (CastrationCenter)this.centreFactory
+            .Create("castration", args[0]);
+        this.centres[castrationCenter] = new List<Animal>();
     }
 
     public void RegisterDog(List<string> args)
@@ -67,6 +74,19 @@ public class PawsMenager
         }
     }
 
+    public void SendForCastration(List<string> args)
+    {
+        var adoptionCenterName = args[0];
+        var castrationCenterName = args[1];
+
+        var adoptionCentre = centres.FirstOrDefault(c => c.Key.Name == adoptionCenterName);
+        CastrationCenter castrationCenter = (CastrationCenter)centres.FirstOrDefault(c => c.Key.Name == castrationCenterName).Key;
+        foreach (var animal in adoptionCentre.Value)
+        {
+            centres[castrationCenter].Add(animal);
+        }
+    }
+
     public void Cleanse(List<string> args)
     {
         var cleansingCenterName = args[0];
@@ -84,7 +104,29 @@ public class PawsMenager
                 }
             }
         }
+
         centres[cleansingCentre.Key].Clear();
+    }
+
+    public void Castrate(List<string> args)
+    {
+        var castrationCentreName = args[0];
+        var castrationCentre = centres.FirstOrDefault(c => c.Key.Name == castrationCentreName);
+
+        foreach (var animal in castrationCentre.Value)
+        {
+            animal.Castrate();
+            this.castratedAnimals.Add(animal);
+            foreach (var centre in centres)
+            {
+                if (centre.Value.Contains(animal) && centre.Key is AdoptionCenter)
+                {
+                    centre.Value.FirstOrDefault(a => a.Name == animal.Name).Castrate();
+                }
+            }
+        }
+
+        centres[castrationCentre.Key].Clear();
     }
 
     public void Adopt(List<string> args)
@@ -109,7 +151,27 @@ public class PawsMenager
         }
     }
 
-    public string Terminate()
+
+    public string CastrationStatistics()
+    {
+        var castrationCentresCount = 0;
+        foreach (var centre in centres)
+        {
+            if (centre.Key is CastrationCenter)
+                castrationCentresCount++;
+        }
+
+        var castratedAnimals = this.castratedAnimals.Count == 0 ? "None" : string.Join(", ", this.castratedAnimals.OrderBy(a => a.Name).Select(a => a.Name));
+
+        var builder = new StringBuilder();
+        builder.AppendLine("Paw Inc. Regular Castration Statistics");
+        builder.AppendLine($"Castration Centers: {castrationCentresCount}");
+        builder.AppendLine($"Castrated Animals: {castratedAnimals}");
+
+        return builder.ToString().TrimEnd();
+    }
+
+    public string Output()
     {
         var adoptinCentresCount = 0;
         var cleansingCentresCount = 0;

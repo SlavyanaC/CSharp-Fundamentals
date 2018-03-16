@@ -12,8 +12,15 @@
 
     public bool CleansingStatus { get; private set; }
 
+    public bool CastrationStatus { get; private set; }
+
     public void Cleanse()
     {
         this.CleansingStatus = true;
+    }
+
+    public void Castrate()
+    {
+        this.CastrationStatus = true;
     }
 }

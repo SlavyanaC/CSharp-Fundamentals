@@ -10,6 +10,8 @@ public class CentreFactory
                 return new CleansingCenter(name);
             case "adoption":
                 return new AdoptionCenter(name);
+            case "castration":
+                return new CastrationCenter(name);
             default:
                 throw new ArgumentException(ErrorMessages.InvalidCentreType);
         }

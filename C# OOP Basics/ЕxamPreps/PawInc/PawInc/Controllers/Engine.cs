@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 public class Engine
 {
@@ -24,6 +21,9 @@ public class Engine
                 case "RegisterAdoptionCenter":
                     this.pawsMenager.RegisterAdoptionCenter(commandArgs);
                     break;
+                case "RegisterCastrationCenter":
+                    this.pawsMenager.RegisterCastrationCenter(commandArgs);
+                    break;
                 case "RegisterDog":
                     this.pawsMenager.RegisterDog(commandArgs);
                     break;
@@ -33,14 +33,23 @@ public class Engine
                 case "SendForCleansing":
                     this.pawsMenager.SendForCleansing(commandArgs);
                     break;
+                case "SendForCastration":
+                    this.pawsMenager.SendForCastration(commandArgs);
+                    break;
                 case "Cleanse":
                     this.pawsMenager.Cleanse(commandArgs);
+                    break;
+                case "Castrate":
+                    this.pawsMenager.Castrate(commandArgs);
                     break;
                 case "Adopt":
                     this.pawsMenager.Adopt(commandArgs);
                     break;
+                case "CastrationStatistics":
+                    Console.WriteLine(this.pawsMenager.CastrationStatistics());
+                    break;
                 case "Paw Paw Pawah":
-                    Console.WriteLine(this.pawsMenager.Terminate());
+                    Console.WriteLine(this.pawsMenager.Output());
                     return;
             }
 

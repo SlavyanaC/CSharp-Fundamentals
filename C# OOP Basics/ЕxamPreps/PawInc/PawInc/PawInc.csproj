@@ -50,6 +50,7 @@
     <Compile Include="Models\Animals\Cat.cs" />
     <Compile Include="Models\Animals\Dog.cs" />
     <Compile Include="Models\Centres\AdoptionCenter.cs" />
+    <Compile Include="Models\Centres\CastrationCenter.cs" />
     <Compile Include="Models\Centres\Centre.cs" />
     <Compile Include="Models\Centres\CleansingCenter.cs" />
     <Compile Include="Models\ErrorMessages.cs" />
