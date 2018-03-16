@@ -5,10 +5,10 @@ public abstract class Centre
     protected Centre(string name)
     {
         this.Name = name;
-        this.StroredAnimals = new List<Animal>();
+        this.StroredAnimals = new Dictionary<Animal, string>();
     }
 
     public string Name { get; }
 
-    public List<Animal> StroredAnimals { get; private set; }
+    public Dictionary<Animal, string> StroredAnimals { get; private set; }
 }
