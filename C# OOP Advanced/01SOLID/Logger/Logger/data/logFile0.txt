@@ -1,0 +1,84 @@
+3/26/2015 2:08:11 PM - INFO - Everything seems fine3/26/2015 2:22:13 PM - WARNING - Warning: ping is too high - disconnect imminent3/26/2015 2:32:44 PM - ERROR - Error parsing request3/26/2015 2:38:01 PM - CRITICAL - No connection string found in App.config3/26/2015 2:39:19 PM - FATAL - mscorlib.dll does not respond3/26/2015 2:22:13 PM - WARNING - Warning: ping is too high - disconnect imminent
+3/26/2015 2:32:44 PM - ERROR - Error parsing request
+3/26/2015 2:38:01 PM - CRITICAL - No connection string found in App.config
+3/26/2015 2:39:19 PM - FATAL - mscorlib.dll does not respond
+3/26/2015 2:08:11 PM - INFO - Everything seems fine
+3/26/2015 2:22:13 PM - WARNING - Warning: ping is too high - disconnect imminent
+3/26/2015 2:32:44 PM - ERROR - Error parsing request
+3/26/2015 2:38:01 PM - CRITICAL - No connection string found in App.config
+3/26/2015 2:39:19 PM - FATAL - mscorlib.dll does not respond
+<log>
+	<date>14:08:11 26-Mar-2015</date>
+<level>INFO</level>
+<message>INFO</message>
+</log>
+<log>
+	<date>14:22:13 26-Mar-2015</date>
+<level>WARNING</level>
+<message>WARNING</message>
+</log>
+<log>
+	<date>14:32:44 26-Mar-2015</date>
+<level>ERROR</level>
+<message>ERROR</message>
+</log>
+<log>
+	<date>14:38:01 26-Mar-2015</date>
+<level>CRITICAL</level>
+<message>CRITICAL</message>
+</log>
+<log>
+	<date>14:39:19 26-Mar-2015</date>
+<level>FATAL</level>
+<message>FATAL</message>
+</log>
+<log>
+	<date>14:08:11 26-Mar-2015</date>
+	<level>INFO</level>
+	<message>INFO</message>
+</log>
+<log>
+	<date>14:22:13 26-Mar-2015</date>
+	<level>WARNING</level>
+	<message>WARNING</message>
+</log>
+<log>
+	<date>14:32:44 26-Mar-2015</date>
+	<level>ERROR</level>
+	<message>ERROR</message>
+</log>
+<log>
+	<date>14:38:01 26-Mar-2015</date>
+	<level>CRITICAL</level>
+	<message>CRITICAL</message>
+</log>
+<log>
+	<date>14:39:19 26-Mar-2015</date>
+	<level>FATAL</level>
+	<message>FATAL</message>
+</log>
+<log>
+	<date>14:08:11 26-Mar-2015</date>
+	<level>INFO</level>
+	<message>INFO</message>
+</log>
+<log>
+	<date>14:22:13 26-Mar-2015</date>
+	<level>WARNING</level>
+	<message>WARNING</message>
+</log>
+<log>
+	<date>14:32:44 26-Mar-2015</date>
+	<level>ERROR</level>
+	<message>ERROR</message>
+</log>
+<log>
+	<date>14:38:01 26-Mar-2015</date>
+	<level>CRITICAL</level>
+	<message>CRITICAL</message>
+</log>
+<log>
+	<date>14:39:19 26-Mar-2015</date>
+	<level>FATAL</level>
+	<message>FATAL</message>
+</log>
