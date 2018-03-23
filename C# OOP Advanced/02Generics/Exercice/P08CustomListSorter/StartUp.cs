@@ -1,54 +1,57 @@
 ﻿using System;
 using System.Collections.Generic;
 
-public class Startup
+namespace P07CustomList
 {
-
-    public static void Main()
+    class StartUp
     {
-        var myList = new CustomList<string>();
-        var command = Console.ReadLine();
-        while (!command.Equals("END"))
+        static void Main()
         {
-            Execute(command, myList);
-            command = Console.ReadLine();
+            var input = string.Empty;
+            CustomList<string> customList = new CustomList<string>();
+            while ((input = Console.ReadLine()) != "END")
+            {
+                string[] args = input.Split();
+                ExecuteCommand(customList, args);
+            }
         }
-    }
 
-    private static void Execute(string command, CustomList<string> myList)
-    {
-        var commandArgs = command.Split();
-        switch (commandArgs[0])
+        private static void ExecuteCommand(CustomList<string> customList, string[] args)
         {
-            case "Add":
-                myList.Add(commandArgs[1]);
-                break;
-            case "Remove":
-                myList.Remove(int.Parse(commandArgs[1]));
-                break;
-            case "Contains":
-                Console.WriteLine(myList.Contains(commandArgs[1]));
-                break;
-            case "Swap":
-                myList.Swap(int.Parse(commandArgs[1]), int.Parse(commandArgs[2]));
-                break;
-            case "Greater":
-                Console.WriteLine(myList.CountGreaterThan(commandArgs[1]));
-                break;
-            case "Min":
-                Console.WriteLine(myList.Min());
-                break;
-            case "Max":
-                Console.WriteLine(myList.Max());
-                break;
-            case "Print":
-                Console.WriteLine(string.Join(Environment.NewLine, myList));
-                break;
-            case "Sort":
-                myList.Sort();
-                break;
-            default:
-                break;
+            var command = args[0];
+            switch (command)
+            {
+                case "Add":
+                    customList.Add(args[1]);
+                    break;
+                case "Remove":
+                    var index = int.Parse(args[1]);
+                    customList.Remove(index);
+                    break;
+                case "Contains":
+                    Console.WriteLine(customList.Contains(args[1]));
+                    break;
+                case "Swap":
+                    var firstIndex = int.Parse(args[1]);
+                    var secondIndex = int.Parse(args[2]);
+                    customList.Swap(firstIndex, secondIndex);
+                    break;
+                case "Greater":
+                    Console.WriteLine(customList.GetCountOfGreaterElements(args[1]));
+                    break;
+                case "Max":
+                    Console.WriteLine(customList.Max());
+                    break;
+                case "Min":
+                    Console.WriteLine(customList.Min());
+                    break;
+                case "Sort":
+                    customList.Sort();
+                    break;
+                case "Print":
+                    Console.WriteLine(customList);
+                    break;
+            }
         }
     }
 }

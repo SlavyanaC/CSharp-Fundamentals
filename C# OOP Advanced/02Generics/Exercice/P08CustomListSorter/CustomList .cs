@@ -4,124 +4,103 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-public class CustomList<T> : IEnumerable<T>
+public class CustomList<T> : ICustomList<T>
     where T : IComparable<T>
 {
-    private const int Initialcapacity = 16;
-    private T[] data;
-    private int length;
-
-    private IEnumerable<T> myList;
+    private IList<T> items;
 
     public CustomList()
     {
-        data = new T[Initialcapacity];
-        this.myList = new List<T>();
+        this.items = new List<T>();
     }
 
-    public IEnumerable<T> Data => this.myList;
-
-    public void Add(T element)
-    {
-        if (this.length == this.data.Length)
-        {
-            this.data = this.data.Concat(new T[this.length]).ToArray();
-        }
-
-        this.data[this.length] = element;
-        this.length++;
-    }
+    public void Add(T item) => this.items.Add(item);
 
     public T Remove(int index)
     {
-        var element = this.data[index];
-        this.data = this.data.Take(index).Concat(this.data.Skip(index + 1)).ToArray();
-        this.length--;
-        return element;
+        var item = this.items[index];
+        this.items.RemoveAt(index);
+        return item;
     }
 
-    public bool Contains(T element)
+    public bool Contains(T item) => this.items.Contains(item);
+
+    public void Swap(int firstindex, int secondIndex)
     {
-        if (this.length == 0)
-        {
-            return false;
-        }
+        var firstElement = this.items[firstindex];
+        this.items[firstindex] = this.items[secondIndex];
+        this.items[secondIndex] = firstElement;
+    }
 
-        var comparer = EqualityComparer<T>.Default;
-
-        foreach (var item in this.data)
+    public int GetCountOfGreaterElements(T element)
+    {
+        var count = 0;
+        foreach (var item in this.items)
         {
-            if (comparer.Equals(item, element))
+            if (element.CompareTo(item) < 0)
             {
-                return true;
+                count++;
             }
         }
 
-        return false;
-    }
-
-    public void Swap(int index1, int index2)
-    {
-        var temp = this.data[index1];
-        this.data[index1] = this.data[index2];
-        this.data[index2] = temp;
-    }
-
-    public int CountGreaterThan(T element)
-    {
-        var counter = 0;
-        foreach (var currentElement in this.data)
-        {
-            if (element.CompareTo(currentElement) < 0)
-            {
-                counter++;
-            }
-        }
-
-        return counter;
+        return count;
     }
 
     public T Max()
     {
-        return this.data.Max();
+        var element = this.items.First();
+        foreach (var item in this.items)
+        {
+            if (item.CompareTo(element) > 0)
+            {
+                element = item;
+            }
+        }
+
+        return element;
     }
 
     public T Min()
     {
-        return this.data.Min();
-    }
+        var element = this.items.First();
+        foreach (var item in this.items)
+        {
+            if (item.CompareTo(element) < 0)
+            {
+                element = item;
+            }
+        }
 
-
-    public IEnumerable<T> MyList { get; }
-
-    public void Sort()
-    {
-        this.data = this.data
-             .Take(this.length)
-             .OrderBy(x => x)
-             .Concat(new T[this.data.Length - this.length])
-             .ToArray();
-    }
-
-
-    public IEnumerator<T> GetEnumerator()
-    {
-        return this.data.Take(this.length).GetEnumerator();
-    }
-
-    IEnumerator IEnumerable.GetEnumerator()
-    {
-        return this.data.Take(this.length).GetEnumerator();
+        return element;
     }
 
     public override string ToString()
     {
-        var sb = new StringBuilder();
-        foreach (var element in this.Data)
+        var builder = new StringBuilder();
+        foreach (var item in this.items)
         {
-            sb.AppendLine(element.ToString());
+            builder.AppendLine($"{item}");
         }
+        return builder.ToString().TrimEnd();
+    }
 
-        return sb.ToString().Trim();
+    public void Sort()
+    {
+        this.items = this.items.OrderBy(i => i).ToList();
+    }
+
+    public IEnumerator<T> GetEnumerator()
+    {
+      return  this.items.GetEnumerator();
+    }
+
+    IEnumerator IEnumerable.GetEnumerator()
+    {
+        return this.GetEnumerator();
+    }
+
+    public int CountGreaterThan(T element)
+    {
+        throw new NotImplementedException();
     }
 }
