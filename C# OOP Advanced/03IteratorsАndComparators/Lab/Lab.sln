@@ -3,9 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2027
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "P01Library", "P01Library\P01Library.csproj", "{106F8E50-244F-4DFF-9CF9-4C2B66EF655A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "P01Library", "P01Library\P01Library.csproj", "{106F8E50-244F-4DFF-9CF9-4C2B66EF655A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "P02LibraryIterator", "P02LibraryIterator\P02LibraryIterator.csproj", "{AF451B28-1AF3-45E3-AC62-3214804F8486}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "P02LibraryIterator", "P02LibraryIterator\P02LibraryIterator.csproj", "{AF451B28-1AF3-45E3-AC62-3214804F8486}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "P03ComparableBook", "P03ComparableBook\P03ComparableBook.csproj", "{FF599296-5F56-4D8A-B73C-93B37942ED66}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "P04BookComparer", "P04BookComparer\P04BookComparer.csproj", "{FCBC3A4B-E58F-4B81-80D0-BA7EE5ACC494}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +25,14 @@ Global
 		{AF451B28-1AF3-45E3-AC62-3214804F8486}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AF451B28-1AF3-45E3-AC62-3214804F8486}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AF451B28-1AF3-45E3-AC62-3214804F8486}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FF599296-5F56-4D8A-B73C-93B37942ED66}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF599296-5F56-4D8A-B73C-93B37942ED66}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF599296-5F56-4D8A-B73C-93B37942ED66}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF599296-5F56-4D8A-B73C-93B37942ED66}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FCBC3A4B-E58F-4B81-80D0-BA7EE5ACC494}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FCBC3A4B-E58F-4B81-80D0-BA7EE5ACC494}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FCBC3A4B-E58F-4B81-80D0-BA7EE5ACC494}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FCBC3A4B-E58F-4B81-80D0-BA7EE5ACC494}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
