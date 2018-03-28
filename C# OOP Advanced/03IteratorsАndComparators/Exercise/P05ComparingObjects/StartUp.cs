@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace _05ComparingObjects
+namespace P05ComparingObjects
 {
     class StartUp
     {
