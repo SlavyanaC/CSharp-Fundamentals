@@ -9,6 +9,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "_02BlackBoxInteger", "P02Bl
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "_03BarracksFactory", "P03BarrackWars-ANewFactory\_03BarracksFactory.csproj", "{830555F8-9A7F-4971-9BF8-5308740C97F6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "P06TrafficLights", "P06TrafficLights\P06TrafficLights.csproj", "{4FF1692F-1F48-4D51-AF2D-443A82052DCD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "P07InfernoInfinity", "P07InfernoInfinity\P07InfernoInfinity.csproj", "{A5AED21B-6B48-49BC-840A-4DE584ADA5A7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +31,14 @@ Global
 		{830555F8-9A7F-4971-9BF8-5308740C97F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{830555F8-9A7F-4971-9BF8-5308740C97F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{830555F8-9A7F-4971-9BF8-5308740C97F6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4FF1692F-1F48-4D51-AF2D-443A82052DCD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4FF1692F-1F48-4D51-AF2D-443A82052DCD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4FF1692F-1F48-4D51-AF2D-443A82052DCD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4FF1692F-1F48-4D51-AF2D-443A82052DCD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A5AED21B-6B48-49BC-840A-4DE584ADA5A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A5AED21B-6B48-49BC-840A-4DE584ADA5A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A5AED21B-6B48-49BC-840A-4DE584ADA5A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A5AED21B-6B48-49BC-840A-4DE584ADA5A7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

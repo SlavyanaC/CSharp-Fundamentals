@@ -6,11 +6,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Core\Commands\" />
+    <None Include="P03_BarraksWars.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="P03_BarraksWars.csproj" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.0.0" />
   </ItemGroup>
 
 </Project>
