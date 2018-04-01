@@ -12,39 +12,39 @@
             while ((inputLine = Console.ReadLine()) != "HARVEST")
             {
                 Type harvestingType = typeof(HarvestingFields);
-                FieldInfo[] fieldsInfo = harvestingType
-                    .GetFields(BindingFlags.Public |
+                FieldInfo[] fields = harvestingType.GetFields(BindingFlags.Public |
                     BindingFlags.NonPublic |
-                    BindingFlags.Instance |
-                    BindingFlags.Static);
+                    BindingFlags.Static |
+                    BindingFlags.Instance);
 
-                string accessModifier = inputLine;
-                FieldInfo[] resultFields = GetFieldsWithSpecificModifier(accessModifier, fieldsInfo);
-                foreach (FieldInfo field in resultFields)
+                string accessModiefier = inputLine;
+                FieldInfo[] wantedFields = GetWantedFields(accessModiefier, fields);
+
+                foreach (FieldInfo field in wantedFields)
                 {
-                    string defauldModifier = field.Attributes.ToString().ToLower();
-                    string fieldModifier = defauldModifier == "family" ? "protected" : defauldModifier;
-                    Console.WriteLine($"{fieldModifier} {field.FieldType.Name} {field.Name}");
+                    var defaultModifier = field.Attributes.ToString().ToLower();
+                    var correctModifier = defaultModifier == "family" ? "protected" : defaultModifier;
+                    Console.WriteLine($"{correctModifier} {field.FieldType.Name} {field.Name}");
                 }
             }
         }
 
-        private static FieldInfo[] GetFieldsWithSpecificModifier(string accessModifier, FieldInfo[] fieldsInfo)
+        private static FieldInfo[] GetWantedFields(string accessModiefier, FieldInfo[] fields)
         {
-            switch (accessModifier)
+            switch (accessModiefier)
             {
                 case "public":
-                    fieldsInfo = fieldsInfo.Where(f => f.IsPublic).ToArray();
-                    break;
-                case "private":
-                    fieldsInfo = fieldsInfo.Where(f => f.IsPrivate).ToArray();
+                    fields = fields.Where(f => f.IsPublic).ToArray();
                     break;
                 case "protected":
-                    fieldsInfo = fieldsInfo.Where(f => f.IsFamily).ToArray();
+                    fields = fields.Where(f => f.IsFamily).ToArray();
+                    break;
+                case "private":
+                    fields = fields.Where(f => f.IsPrivate).ToArray();
                     break;
             }
 
-            return fieldsInfo;
+            return fields;
         }
     }
 }
