@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace P06TrafficLights
+﻿namespace P06TrafficLights
 {
     class StartUp
     {
