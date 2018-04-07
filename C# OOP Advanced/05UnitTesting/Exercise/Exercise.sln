@@ -13,7 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "P04BubbleSort", "P04BubbleS
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "P08CustomLinkedList", "P08CustomLinkedList\P08CustomLinkedList.csproj", "{9F936724-218E-4E29-8E66-CA9A447C99E9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{5B79B2B2-3582-4D48-9FD3-C5A2FF02598E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTests", "UnitTests\UnitTests.csproj", "{5B79B2B2-3582-4D48-9FD3-C5A2FF02598E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "P10TirePressureMonitoringSystem", "P10TirePressureMonitoringSystem\P10TirePressureMonitoringSystem.csproj", "{490776DA-2EBB-4D69-80F8-BEC4E15BFF37}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{5B79B2B2-3582-4D48-9FD3-C5A2FF02598E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5B79B2B2-3582-4D48-9FD3-C5A2FF02598E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5B79B2B2-3582-4D48-9FD3-C5A2FF02598E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{490776DA-2EBB-4D69-80F8-BEC4E15BFF37}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{490776DA-2EBB-4D69-80F8-BEC4E15BFF37}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{490776DA-2EBB-4D69-80F8-BEC4E15BFF37}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{490776DA-2EBB-4D69-80F8-BEC4E15BFF37}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
