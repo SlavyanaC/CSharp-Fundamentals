@@ -1,4 +1,4 @@
-﻿namespace P01DatabaseTests
+﻿namespace UnitTests
 {
     using NUnit.Framework;
     using P01Database;
@@ -6,7 +6,7 @@
     using System.Linq;
     using System.Reflection;
 
-    public class DatabaseTest
+    public class DatabaseTests
     {
         private const int Capacity = 16;
         private const int testNumber = 5;
@@ -53,9 +53,9 @@
             this.database = new Database();
             this.database.Add(value);
 
-             var dataInfo = typeof(Database)
-                .GetFields(BindingFlags.NonPublic | BindingFlags.Instance)
-                .First(f => f.FieldType == typeof(int[]));
+            var dataInfo = typeof(Database)
+               .GetFields(BindingFlags.NonPublic | BindingFlags.Instance)
+               .First(f => f.FieldType == typeof(int[]));
 
             var currentIndexInfo = typeof(Database)
                 .GetFields(BindingFlags.NonPublic | BindingFlags.Instance)
