@@ -25,7 +25,7 @@ public class Engine : IEngine
 
             var result = this.commandInterpreter.ProcessCommand(data);
             this.writer.WriteLine(result);
-            if (input.Trim().Equals(ShutdownMessage, StringComparison.OrdinalIgnoreCase))
+            if (input.Equals(ShutdownMessage, StringComparison.OrdinalIgnoreCase))
             {
                 break;
             }

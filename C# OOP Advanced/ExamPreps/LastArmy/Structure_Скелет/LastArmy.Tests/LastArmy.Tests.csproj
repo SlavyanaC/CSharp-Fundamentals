@@ -4,14 +4,13 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{3E753A95-6031-4950-94BA-C346BD2048E8}</ProjectGuid>
+    <ProjectGuid>{C2839D86-552A-41C4-A89C-21A6CD1CA468}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Minedraft.Tests</RootNamespace>
-    <AssemblyName>Minedraft.Tests</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <RootNamespace>LastArmy.Tests</RootNamespace>
+    <AssemblyName>LastArmy.Tests</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -32,7 +31,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="nunit.framework, Version=3.9.0.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
-      <HintPath>..\Structure_Skeleton\packages\NUnit.3.9.0\lib\net45\nunit.framework.dll</HintPath>
+      <HintPath>..\packages\NUnit.3.9.0\lib\net45\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -44,13 +43,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ProviderControllerTests.cs" />
+    <Compile Include="MissionControllerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Structure_Skeleton\Minedraft.csproj">
-      <Project>{2b8e833a-8d75-44c5-a88a-9b4b9fe1c036}</Project>
-      <Name>Minedraft</Name>
+    <ProjectReference Include="..\Last Army\Last Army.csproj">
+      <Project>{fa1ac72f-2cd0-4247-9078-b9bd8c9216cc}</Project>
+      <Name>Last Army</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
