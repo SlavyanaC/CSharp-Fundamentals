@@ -3,15 +3,18 @@ using System.Linq;
 
 public class RepairCommand : Command
 {
-    public RepairCommand(IList<string> arguments, IHarvesterController harvesterController, IProviderController providerController)
-        : base(arguments, harvesterController, providerController)
+    private IProviderController providerController;
+
+    public RepairCommand(IList<string> arguments, IProviderController providerController)
+        : base(arguments)
     {
+        this.providerController = providerController;
     }
 
     public override string Execute()
     {
         double value = double.Parse(this.Arguments.First());
-        var result = this.ProviderController.Repair(value);
+        var result = this.providerController.Repair(value);
 
         return result;
     }

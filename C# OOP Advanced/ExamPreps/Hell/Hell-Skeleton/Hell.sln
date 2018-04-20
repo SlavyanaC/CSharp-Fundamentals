@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hell", "Hell\Hell.csproj", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hell.Test", "Hell.Test\Hell.Test.csproj", "{D34061A2-7DD9-49C0-909D-8D9037098361}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Judge.Tests", "Judge.Tests\Judge.Tests.csproj", "{0D7C845E-DECE-42F6-A74E-083EB21430EF}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,10 +21,6 @@ Global
 		{D34061A2-7DD9-49C0-909D-8D9037098361}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D34061A2-7DD9-49C0-909D-8D9037098361}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D34061A2-7DD9-49C0-909D-8D9037098361}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0D7C845E-DECE-42F6-A74E-083EB21430EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0D7C845E-DECE-42F6-A74E-083EB21430EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0D7C845E-DECE-42F6-A74E-083EB21430EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0D7C845E-DECE-42F6-A74E-083EB21430EF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

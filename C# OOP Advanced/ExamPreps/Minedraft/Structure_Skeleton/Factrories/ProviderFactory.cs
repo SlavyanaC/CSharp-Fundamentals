@@ -15,7 +15,7 @@ public class ProviderFactory : IProviderFactory
 
         string typeFullName = type + ProviderSuffix;
 
-        Type providerType = Assembly.GetExecutingAssembly()
+        Type providerType = Assembly.GetCallingAssembly()
             .GetTypes()
             .FirstOrDefault(t => t.Name.Equals(typeFullName, StringComparison.OrdinalIgnoreCase));
 

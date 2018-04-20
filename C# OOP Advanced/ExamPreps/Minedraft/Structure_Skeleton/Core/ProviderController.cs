@@ -40,7 +40,7 @@ public class ProviderController : IProviderController
             {
                 provider.Broke();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 reminder.Add(provider);
             }

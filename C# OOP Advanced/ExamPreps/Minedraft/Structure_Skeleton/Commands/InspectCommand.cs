@@ -4,9 +4,14 @@ using System.Reflection;
 
 public class InspectCommand : Command
 {
+    private IHarvesterController harvesterController;
+    private IProviderController providerController;
+
     public InspectCommand(IList<string> arguments, IHarvesterController harvesterController, IProviderController providerController)
-        : base(arguments, harvesterController, providerController)
+        : base(arguments)
     {
+        this.harvesterController = harvesterController;
+        this.providerController = providerController;
     }
 
     public override string Execute()
@@ -28,22 +33,22 @@ public class InspectCommand : Command
 
     private void GetProviders(List<IEntity> entities)
     {
-        var providerEntities = this.ProviderController
+        var providerEntities = this.providerController
             .GetType()
             .GetFields(BindingFlags.NonPublic | BindingFlags.Instance)
             .FirstOrDefault(f => f.Name.Equals("providers"))
-            .GetValue(this.ProviderController);
+            .GetValue(this.providerController);
 
         entities.AddRange((List<IProvider>)providerEntities);
     }
 
     private void GetHarvesters(List<IEntity> entities)
     {
-        var harvesterEntities = this.HarvesterController
+        var harvesterEntities = this.harvesterController
             .GetType()
             .GetFields(BindingFlags.NonPublic | BindingFlags.Instance)
             .FirstOrDefault(f => f.Name.Equals("harvesters"))
-            .GetValue(this.HarvesterController); 
+            .GetValue(this.harvesterController); 
 
         entities.AddRange((List<IHarvester>)harvesterEntities);
     }

@@ -3,26 +3,30 @@ using System.Linq;
 
 public class RegisterCommand : Command
 {
+    private IHarvesterController harvesterController;
+    private IProviderController providerController;
+
     public RegisterCommand(IList<string> arguments, IHarvesterController harvesterController, IProviderController providerController)
-        : base(arguments, harvesterController, providerController)
+        : base(arguments)
     {
+        this.harvesterController = harvesterController;
+        this.providerController = providerController;
     }
 
     public override string Execute()
     {
         string entityTypeAsString = this.Arguments[0];
-        List<string> tokens = this.Arguments.Skip(1).ToList();
 
         if (entityTypeAsString.Equals(nameof(Harvester)))
         {
-           return this.HarvesterController.Register(tokens);
+           return this.harvesterController.Register(this.Arguments.Skip(1).ToList());
         }
 
         if (entityTypeAsString.Equals(nameof(Provider))) 
         {
-           return this.ProviderController.Register(tokens);
+           return this.providerController.Register(this.Arguments.Skip(1).ToList());
         }
 
-        return string.Format(Constants.UnsuccessfullRegistration, tokens[0]);
+        return string.Format(Constants.UnsuccessfullRegistration, this.Arguments[0]);
     }
 }

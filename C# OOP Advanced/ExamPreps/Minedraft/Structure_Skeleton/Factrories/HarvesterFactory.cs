@@ -17,7 +17,7 @@ public class HarvesterFactory : IHarvesterFactory
         string fullEntityName = type + HarvesterSuffix;
 
         Type harvesterType = Assembly
-            .GetExecutingAssembly()
+            .GetCallingAssembly()
             .GetTypes()
             .FirstOrDefault(t => t.Name.Equals(fullEntityName, StringComparison.OrdinalIgnoreCase));
 

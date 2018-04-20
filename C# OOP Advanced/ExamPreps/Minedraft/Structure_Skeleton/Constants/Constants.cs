@@ -1,4 +1,4 @@
-﻿public class Constants
+﻿public static class Constants
 {
     public const string SuccessfullRegistration = "Successfully registered {0}";
 
@@ -17,4 +17,8 @@
     public const string SystemShutDown = "System Shutdown\r\nTotal Energy Produced: {0}\r\nTotal Mined Plumbus Ore: {1}";
 
     public const string ModeChange = "Mode changed to {0}!";
+
+    public const string CommandNotFound = "No command with {0} name";
+
+    public const string InvalidCommand = "{0}Command is not valid";
 }

@@ -7,43 +7,64 @@ public class CommandInterpreter : ICommandInterpreter
 {
     private const string CommandSuffix = "Command";
 
-    private IHarvesterController harvesterController;
-    private IProviderController providerController;
-
     public CommandInterpreter(IHarvesterController harvesterController, IProviderController providerController)
     {
         this.HarvesterController = harvesterController;
         this.ProviderController = providerController;
     }
 
-    public IHarvesterController HarvesterController
-    {
-        get => this.harvesterController;
-        private set => this.harvesterController = value;
-    }
+    public IHarvesterController HarvesterController { get; private set; }
 
-    public IProviderController ProviderController
-    {
-        get => this.providerController;
-        private set => this.providerController = value;
-    }
+    public IProviderController ProviderController { get; private set; }
 
     public string ProcessCommand(IList<string> args)
     {
-        string commandName = args[0];
-        args = args.Skip(1).ToList();
-        string commandFullName = commandName + CommandSuffix;
-
-        Type commandType = Assembly.GetExecutingAssembly()
-            .GetTypes()
-            .FirstOrDefault(t => t.Name.Equals(commandFullName, StringComparison.OrdinalIgnoreCase));
-
-        object[] ctorParams = new object[] { args, this.HarvesterController, this.ProviderController };
-
-        ICommand command = (ICommand)Activator.CreateInstance(commandType, ctorParams);
-
+        ICommand command = this.CreateCommand(args);
         string result = command.Execute();
-
         return result;
+    }
+
+    private ICommand CreateCommand(IList<string> args)
+    {
+        string commandName = args[0];
+        string fullCommandName = commandName + CommandSuffix;
+
+        Type commandType = Assembly.GetCallingAssembly()
+            .GetTypes()
+            .FirstOrDefault(t => t.Name.Equals(fullCommandName));
+
+        if (commandType == null)
+        {
+            throw new ArgumentException(string.Format(Constants.CommandNotFound, commandName));
+        }
+
+        if (!typeof(ICommand).IsAssignableFrom(commandType))
+        {
+            throw new InvalidOperationException(string.Format(Constants.InvalidCommand, commandName));
+        }
+
+        ConstructorInfo ctor = commandType.GetConstructors().First();
+        ParameterInfo[] parameterInfos = ctor.GetParameters();
+
+        object[] parameters = new object[parameterInfos.Length];
+
+        for (int i = 0; i < parameterInfos.Length; i++)
+        {
+            Type paramType = parameterInfos[i].ParameterType;
+            if (paramType == typeof(IList<string>))
+            {
+                parameters[i] = args.Skip(1).ToList();
+            }
+            else
+            {
+                PropertyInfo paramInfo = this.GetType().GetProperties()
+                    .FirstOrDefault(p => p.PropertyType == paramType);
+                parameters[i] = paramInfo.GetValue(this);
+            }
+        }
+
+        ICommand command = (ICommand)Activator.CreateInstance(commandType, parameters);
+
+        return command;
     }
 }

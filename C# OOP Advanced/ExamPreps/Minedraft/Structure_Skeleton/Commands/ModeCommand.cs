@@ -3,14 +3,17 @@ using System.Linq;
 
 public class ModeCommand : Command
 {
-    public ModeCommand(IList<string> arguments, IHarvesterController harvesterController, IProviderController providerController) 
-        : base(arguments, harvesterController, providerController)
+    private IHarvesterController harvesterController;
+
+    public ModeCommand(IList<string> arguments, IHarvesterController harvesterController) 
+        : base(arguments)
     {
+        this.harvesterController = harvesterController;
     }
 
     public override string Execute()
     {
-        var result = this.HarvesterController.ChangeMode(this.Arguments.First());
+        var result = this.harvesterController.ChangeMode(this.Arguments.First());
         return result;
     }
 }

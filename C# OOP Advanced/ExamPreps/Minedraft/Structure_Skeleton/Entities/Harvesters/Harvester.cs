@@ -1,4 +1,6 @@
-﻿public abstract class Harvester : IHarvester
+﻿using System;
+
+public abstract class Harvester : IHarvester
 {
     private const double InitialDurability = 1000;
     private const double DurabilityModeLoss = 100;
@@ -33,6 +35,10 @@
     public void Broke()
     {
         this.Durability -= DurabilityModeLoss;
+        if (this.Durability < 0)
+        {
+            throw new Exception();
+        }
     }
 
     public double Produce()

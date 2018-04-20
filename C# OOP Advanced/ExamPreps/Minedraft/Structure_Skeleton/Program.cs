@@ -16,7 +16,7 @@ public class Program
 
         ICommandInterpreter commandInterpreter = new CommandInterpreter(harvesterController, providerController);
 
-        Engine engine = new Engine(reader, writer, commandInterpreter);
+        IEngine engine = new Engine(reader, writer, commandInterpreter);
         engine.Run();
     }
 }

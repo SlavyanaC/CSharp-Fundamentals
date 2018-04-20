@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 public class HarvesterController : IHarvesterController
@@ -9,7 +10,7 @@ public class HarvesterController : IHarvesterController
     private const double MinDurability = 0;
 
     private IHarvesterFactory harvesterFactory;
-    private IList<IHarvester> harvesters;
+    private readonly IList<IHarvester> harvesters;
     private IEnergyRepository energyRepository;
 
     private string mode;
@@ -25,6 +26,8 @@ public class HarvesterController : IHarvesterController
 
     public double ОreOutput { get; private set; }
 
+    public IReadOnlyCollection<IEntity> Entities => (IReadOnlyCollection<IHarvester>)this.harvesters;
+
     public string Register(IList<string> args)
     {
         IHarvester harvester = this.harvesterFactory.GenerateHarvester(args);
@@ -39,12 +42,23 @@ public class HarvesterController : IHarvesterController
             this.mode = mode;
         }
 
+        List<IHarvester> reminder = new List<IHarvester>();
         foreach (IHarvester harvester in this.harvesters)
         {
-            harvester.Broke();
+            try
+            {
+                harvester.Broke();
+            }
+            catch(Exception)
+            {
+                reminder.Add(harvester);
+            }
         }
 
-        this.harvesters = harvesters.Where(h => h.Durability >= MinDurability).ToList();
+        foreach (var entity in reminder)
+        {
+            this.harvesters.Remove(entity);
+        }
 
         return string.Format(Constants.ModeChange, mode);
     }
