@@ -1,14 +1,14 @@
 ﻿public interface IItem
 {
-    int StrengthBonus { get; }
-
-    int AgilityBonus { get; }
-
-    int IntelligenceBonus { get; }
-
-    int HitPointsBonus { get; }
-
-    int DamageBonus { get; }
+    long StrengthBonus { get; }
+    
+    long AgilityBonus { get; }
+    
+    long IntelligenceBonus { get; }
+    
+    long HitPointsBonus { get; }
+    
+    long DamageBonus { get; }
 
     string Name { get; }
 }

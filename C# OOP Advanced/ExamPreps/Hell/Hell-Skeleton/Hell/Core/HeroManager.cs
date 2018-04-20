@@ -45,11 +45,11 @@ public class HeroManager : IHeroManager
     private IItem CreateItem(IList<string> arguments)
     {
         string itemName = arguments[0];
-        int strengthBonus = int.Parse(arguments[2]);
-        int agilityBonus = int.Parse(arguments[3]);
-        int intelligenceBonus = int.Parse(arguments[4]);
-        int hitPointsBonus = int.Parse(arguments[5]);
-        int damageBonus = int.Parse(arguments[6]);
+        long strengthBonus = long.Parse(arguments[2]);
+        long agilityBonus = long.Parse(arguments[3]);
+        long intelligenceBonus = long.Parse(arguments[4]);
+        long hitPointsBonus = long.Parse(arguments[5]);
+        long damageBonus = long.Parse(arguments[6]);
 
         Type entityType = Assembly.GetExecutingAssembly()
             .GetTypes()
@@ -76,11 +76,11 @@ public class HeroManager : IHeroManager
     private IRecipe CreateRecipe(IList<string> arguments)
     {
         string recipeName = arguments[0];
-        int strengthBonus = int.Parse(arguments[2]);
-        int agilityBonus = int.Parse(arguments[3]);
-        int intelligenceBonus = int.Parse(arguments[4]);
-        int hitPointsBonus = int.Parse(arguments[5]);
-        int damageBonus = int.Parse(arguments[6]);
+        long strengthBonus = long.Parse(arguments[2]);
+        long agilityBonus = long.Parse(arguments[3]);
+        long intelligenceBonus = long.Parse(arguments[4]);
+        long hitPointsBonus = long.Parse(arguments[5]);
+        long damageBonus = long.Parse(arguments[6]);
         string[] reqiredItem = arguments.Skip(7).ToArray();
 
         Type entityType = Assembly.GetExecutingAssembly()

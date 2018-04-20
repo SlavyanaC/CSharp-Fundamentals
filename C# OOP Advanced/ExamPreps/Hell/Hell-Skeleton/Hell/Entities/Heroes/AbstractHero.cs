@@ -13,7 +13,7 @@ public abstract class AbstractHero : IHero
     private long damage;
     private IInventory inventory;
 
-    protected AbstractHero(string name, int strength, int agility, int intelligence, int hitPoints, int damage)
+    protected AbstractHero(string name, long strength, long agility, long intelligence, long hitPoints, long damage)
     {
         this.Name = name;
         this.strength = strength;

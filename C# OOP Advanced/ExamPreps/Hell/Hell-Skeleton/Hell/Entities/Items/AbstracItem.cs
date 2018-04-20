@@ -2,7 +2,7 @@
 
 public abstract class AbstracItem : IItem
 {
-    protected AbstracItem(string name, int strenghtBonus, int agilityBonus, int inteligenceBonus, int hitpointsBonus, int demageBonus)
+    protected AbstracItem(string name, long strenghtBonus, long agilityBonus, long inteligenceBonus, long hitpointsBonus, long demageBonus)
     {
         this.Name = name;
         this.StrengthBonus = strenghtBonus;
@@ -14,15 +14,15 @@ public abstract class AbstracItem : IItem
 
     public string Name { get; }
 
-    public int StrengthBonus { get; }
+    public long StrengthBonus { get; }
 
-    public int AgilityBonus { get; }
+    public long AgilityBonus { get; }
 
-    public int IntelligenceBonus { get; }
+    public long IntelligenceBonus { get; }
 
-    public int HitPointsBonus { get; }
+    public long HitPointsBonus { get; }
 
-    public int DamageBonus { get; }
+    public long DamageBonus { get; }
 
     public override string ToString()
     {
