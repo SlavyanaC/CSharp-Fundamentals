@@ -1,6 +1,5 @@
-﻿public class OutputMessages
+﻿public static class OutputMessages
 {
-    //TODO
     public const string NoWeaponsForSoldierType = "There is no weapon for {0} {1}!";
 
     public const string SoldierToString = "{0} - {1}";
@@ -16,4 +15,8 @@
     public const string MissionsSummuryFailed = "Failed missions - {0}";
 
     public const string InputTerminateString = "Enough! Pull back!";
+
+    public const string InvalidType = "{0} is an invalid type";
+
+    public const string ObjectNotOfWantedType = "{0} is not of type {1}";
 }

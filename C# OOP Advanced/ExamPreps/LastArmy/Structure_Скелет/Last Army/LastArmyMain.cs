@@ -1,6 +1,6 @@
 ﻿class LastArmyMain
 {
-    static void Main()
+   public static void Main()
     {
         IReader reader = new ConsoleReader();
         IWriter writer = new ConsoleWriter();

@@ -11,7 +11,6 @@ public class Program
 
         IHarvesterFactory harvesterFactory = new HarvesterFactory();
         IHarvesterController harvesterController = new HarvesterController(harvesterFactory, new List<IHarvester>(), energyRepository);
-
         IProviderController providerController = new ProviderController(energyRepository);
 
         ICommandInterpreter commandInterpreter = new CommandInterpreter(harvesterController, providerController);
