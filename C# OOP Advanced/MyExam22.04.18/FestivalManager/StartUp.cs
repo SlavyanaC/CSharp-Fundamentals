@@ -9,18 +9,18 @@
     using Entities.Contracts;
 
     public static class StartUp
-	{
-		public static void Main(string[] args)
-		{
-			IStage stage = new Stage();
+    {
+        public static void Main(string[] args)
+        {
+            IStage stage = new Stage();
 
             IReader reader = new ConsoleReader();
             IWriter writer = new ConsoleWriter();
-			ISetController setController = new SetController(stage);
-			IFestivalController festivalController = new FestivalController(stage, setController);
+            ISetController setController = new SetController(stage);
+            IFestivalController festivalController = new FestivalController(stage, setController);
 
-			var engine = new Engine(reader, writer, festivalController, setController);
+            var engine = new Engine(reader, writer, festivalController, setController);
             engine.Run();
-		}
-	}
+        }
+    }
 }
